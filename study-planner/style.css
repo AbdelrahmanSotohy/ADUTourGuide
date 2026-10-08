@@ -1,0 +1,74 @@
+/* Page spacing keeps the existing fixed navbar clear of the content. */
+main { margin-top: 138px; }
+@media (min-width: 1100px) { main { margin-top: 105px; } }
+@media (max-width: 767px) { main { margin-top: 88px; } }
+[hidden] { display: none !important; }
+.print-cell { display: none; }
+.planner-summary > label { max-width: 300px; }
+.summary-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.summary-stats .metric { margin: 20px 0; }
+#balance { color: #0ca2dd; }
+#balance.under { color: #e7212b; }
+#progress-text { margin: 10px 0 24px; font-size: 13px; }
+
+/* Light-blue year banners and tidy 2x2 semester layouts. */
+.year-block { margin: 28px 0; overflow: hidden; border: 1px solid #e3e9f0; border-radius: 12px; background: #fff; box-shadow: 0 4px 18px rgba(11,35,63,.05); }
+.year-banner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 24px; background: #dff2fb; color: #0b233f; }
+.year-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.year-banner h2 { margin: 0; font-size: 20px; }
+.year-banner > span { margin-left: auto; font-size: 13px; font-weight: 600; }
+.semesters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding: 24px; }
+.semester { min-width: 0; }
+.semester h3 { margin: 0 0 12px; color: #0b233f; }
+.semester .table-wrap { margin: 0 0 12px; }
+.semester table { table-layout: fixed; }
+.semester th, .semester td { padding: 8px 6px; font-size: 12px; }
+.semester th:first-child { width: 54px; }
+.semester th:nth-child(2) { width: 28%; }
+.semester th:last-child { width: 64px; }
+.semester tbody tr:nth-child(even) { background: #f6f9fc; }
+.semester tbody tr:hover { background: #edf8fd; }
+
+/* Visible input borders make each editable cell easy to find. */
+.semester input { width: 100%; min-width: 0; min-height: 32px; margin: 0; padding: 6px 4px; border: 1px solid #b8c8d8; border-radius: 4px; background: #fff; box-shadow: none; font-size: 13px; }
+.semester input:focus { outline: 0; border-color: #0ca2dd; background: #fff; box-shadow: 0 0 0 2px rgba(12,162,221,.12); }
+.delete-row { min-height: 24px; padding: 0 5px; margin-left: 3px; border: 0; background: transparent; color: #596779; box-shadow: none; font-size: 15px; }
+.delete-row:hover { background: #fff0f1; color: #e7212b; }
+.semester tfoot td { background: #f0f8fc; color: #0b233f; font-weight: 650; }
+.semester .cumulative td { font-style: italic; font-weight: 400; }
+.add-year { text-align: center; margin: 30px 0 40px; }
+
+/* Confirmation boxes replace browser dialogs that embedded views may block. */
+.confirmation-backdrop { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(11,35,63,.45); }
+.confirmation-card { width: min(100%, 440px); max-height: calc(100dvh - 40px); overflow-y: auto; padding: 28px; background: #fff; border-radius: 12px; box-shadow: 0 16px 48px rgba(11,35,63,.2); }
+.confirmation-card .toolbar { justify-content: flex-end; margin: 24px 0 0; }
+@media (max-width: 767px) {
+  .semesters { grid-template-columns: 1fr; padding: 16px; gap: 24px; }
+  .year-banner { padding: 16px; }
+  .year-banner h2 { font-size: 18px; }
+  .summary-stats { gap: 12px; }
+  .summary-stats .metric { padding: 14px; }
+  .summary-stats .result { font-size: 27px; }
+}
+
+/* Print the entered values as wrapping text, rather than clipped input boxes. */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body { background: #fff; color: #12181f; font-size: 10pt; }
+  .navbar, button, .toolbar, .skip, #status, .confirmation-backdrop, footer, .add-year { display: none !important; }
+  main { max-width: none; margin: 0; padding: 0; }
+  .lead { margin-bottom: 12px; }
+  .panel, .year-block { box-shadow: none; margin: 12px 0; }
+  .planner-summary { padding: 12px; }
+  .summary-stats .metric { margin: 10px 0; padding: 10px; }
+  .year-banner { padding: 10px 12px; background: #e8f5fb; }
+  .semesters { display: grid; grid-template-columns: 1fr 1fr; padding: 12px; gap: 16px; }
+  .semester { break-inside: avoid; }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  .table-wrap { overflow: visible; }
+  input { display: none !important; }
+  .print-cell { display: block; white-space: pre-wrap; overflow-wrap: anywhere; font-weight: 400; }
+  #degree-progress { height: 8px; }
+  #progress-text { margin-bottom: 0; }
+}

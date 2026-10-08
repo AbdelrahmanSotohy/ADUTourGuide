@@ -1,0 +1,55 @@
+/* This page keeps the shared fixed navbar and its original breakpoints. */
+main { margin-top: 138px; }
+@media (min-width: 1100px) { main { margin-top: 105px; } }
+@media (max-width: 767px) { main { margin-top: 88px; } }
+[hidden] { display: none !important; }
+
+/* Course cards and meeting-block editor. */
+#courses { margin: 24px 0; }
+.course-card h3 { margin: 0; }
+.course-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.section-item { padding: 16px 0; border-top: 1px solid #e3e9f0; }
+.section-item:first-of-type { margin-top: 18px; }
+.section-item p { margin: 6px 0 12px; }
+.meeting { margin: 16px 0; padding: 20px; border: 1px solid #e3e9f0; border-radius: 10px; background: #f8fafc; }
+.meeting legend { color: #0b233f; font-weight: 650; padding: 0 6px; }
+.days { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 18px; }
+.days label { display: inline-flex; align-items: center; gap: 4px; }
+#editor-status { margin-top: 12px; }
+#weekly .toolbar { align-items: center; justify-content: space-between; }
+#weekly h2 { margin: 0; }
+#page-number { align-self: center; color: #596779; }
+
+/* Seven day columns with a separate time rail. The phone can scroll horizontally. */
+.week-scroll { overflow-x: auto; margin: 20px 0; border: 1px solid #e3e9f0; border-radius: 10px; }
+.week-grid { display: grid; grid-template-columns: 70px repeat(7, minmax(100px, 1fr)); min-width: 820px; background: #fff; }
+.week-head { padding: 12px 8px; background: #edf8fd; color: #0b233f; text-align: center; font-size: 13px; font-weight: 650; border-bottom: 1px solid #e3e9f0; }
+.time-rail, .day-column { position: relative; }
+.day-column { border-left: 1px solid #e3e9f0; background: repeating-linear-gradient(to bottom, transparent 0, transparent 35px, #e3e9f0 35px, #e3e9f0 36px); }
+.time-tick { position: absolute; right: 9px; font-size: 11px; color: #596779; }
+.class-block { position: absolute; left: 3px; right: 3px; padding: 5px 6px; border-radius: 5px; color: #fff; overflow: hidden; font-size: 11px; line-height: 1.35; }
+.class-block strong { display: block; font-size: 12px; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; color: #0b233f; font-size: 13px; }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend i { width: 12px; height: 12px; border-radius: 3px; }
+@media (max-width: 767px) { .meeting { padding: 14px; } .course-actions button { flex: 1; } }
+
+/* Keep headings visible when opening the editor or calendar under the fixed bar. */
+#editor, #weekly { scroll-margin-top: 130px; }
+@media (min-width: 1100px) { #editor, #weekly { scroll-margin-top: 90px; } }
+@media (max-width: 767px) { #editor, #weekly { scroll-margin-top: 80px; } }
+
+/* Each generated result is a visible weekly timetable, five per page. */
+.combination-timetable { padding: 24px 0; border-bottom: 1px solid #e3e9f0; }
+.combination-timetable:first-child { padding-top: 0; }
+.combination-timetable:last-child { border-bottom: 0; }
+.combination-timetable h3 { margin: 0 0 8px; color: #0b233f; }
+.combination-timetable .toolbar { margin-top: 18px; }
+
+/* Confirmation overlay: usable in a full page and in ChatGPT's embedded preview. */
+.confirmation-backdrop { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(11, 35, 63, 0.45); }
+.confirmation-card { width: min(100%, 440px); max-height: calc(100dvh - 40px); overflow-y: auto; padding: 28px; border-radius: 12px; background: #fff; box-shadow: 0 16px 48px rgba(11, 35, 63, 0.2); }
+.confirmation-card h2 { margin-bottom: 14px; }
+.confirmation-card .toolbar { justify-content: flex-end; margin: 24px 0 0; }
+#confirmation-accept { background: #e7212b; color: #fff; }
+#confirmation-accept:hover { background: #c91c25; }

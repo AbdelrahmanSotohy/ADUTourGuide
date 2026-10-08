@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Schedule Generator | ADU Tour Guide</title>
+<meta name="description" content="Enter your course sections and times and get every weekly schedule with no clashes. Compare options in a weekly grid and export to CSV.">
+  <link rel="stylesheet" href="../shared.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="../shared.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <nav class="navbar" aria-label="Main navigation"><a class="site-brand" href="../index.html">ADU TourGuide</a><button class="hamburger" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">☰</button><ul id="navLinks"><li><a href="../index.html">Home</a></li><li><a href="../gpa-calculator/index.html">GPA Calculator</a></li><li><a href="../schedule-generator/index.html" aria-current="page">Schedule Generator</a></li><li><a href="../study-planner/index.html">Degree Planner</a></li><li><a href="../gpa-plan/index.html">GPA Planner</a></li><li><a href="../grade-plan/index.html">Grade Planner</a></li><li><a href="../project-split/index.html">Project Work Split</a></li></ul></nav>
+  <main id="main">
+    <h1>Schedule Generator</h1>
+    <p class="lead">Enter your courses and available sections. Find a weekly schedule that fits.</p>
+    <section class="panel">
+      <h2>Your courses</h2>
+      <form id="course-form" class="fields">
+        <label for="course-name">Course name or code
+          <input id="course-name" required maxlength="100" placeholder="e.g. CEN325">
+        </label>
+        <button type="submit">+ Add course</button>
+      </form>
+      <div class="toolbar">
+        <button id="export-data" class="secondary">Export courses CSV</button>
+        <button id="import-data" class="secondary">Import courses CSV</button>
+        <button id="clear" class="danger">Clear all</button>
+      </div>
+      <input id="csv-file" type="file" accept=".csv,text/csv" hidden>
+      <p class="muted"><small>Import replaces saved courses after validation. Add only the professors’ sections you want to consider.</small></p>
+    </section>
+    <div id="courses" class="grid"></div>
+
+    <section id="editor" class="panel" hidden>
+      <h2 id="editor-title">Add section</h2>
+      <form id="section-form">
+        <div class="fields">
+          <label>Section label (optional)<input id="section-label" maxlength="100" placeholder="e.g. 101"></label>
+          <label>Professor (optional)<input id="professor" maxlength="100" placeholder="Dr. Thomas Wayne"></label>
+        </div>
+        <div id="blocks"></div>
+        <div class="toolbar">
+          <button type="submit">Save section</button>
+          <button id="cancel" type="button" class="secondary">Cancel</button>
+        </div>
+        <p id="editor-status" class="warning" role="alert"></p>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="toolbar"><button id="generate">Generate schedules</button></div>
+      <p class="muted"><small>One section per course. Classes may meet back-to-back. Search stops at 500 results or 100,000 search steps.</small></p>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+    <section id="results" class="panel" hidden>
+      <h2 id="result-count"></h2>
+      <p id="result-note" class="muted"></p>
+      <div id="result-list"></div>
+      <div class="toolbar">
+        <button id="previous" class="secondary">Previous</button>
+        <span id="page-number"></span>
+        <button id="next" class="secondary">Next</button>
+      </div>
+    </section>
+    <section id="weekly" class="panel" hidden>
+      <div class="toolbar">
+        <h2 id="weekly-title"></h2>
+        <button id="export-combination" class="secondary">Export this combination CSV</button>
+      </div>
+      <p class="muted"><small>On a phone, swipe the grid sideways to see all seven days.</small></p>
+      <div id="weekly-grid" class="week-scroll"></div>
+      <div id="weekly-legend" class="legend"></div>
+    </section>
+  </main>
+  <!-- A page confirmation works inside embedded views where browser dialogs may be blocked. -->
+  <div id="confirmation" class="confirmation-backdrop" hidden>
+    <section class="confirmation-card" role="alertdialog" aria-modal="true" aria-labelledby="confirmation-title" aria-describedby="confirmation-text">
+      <h2 id="confirmation-title">Confirm action</h2>
+      <p id="confirmation-text"></p>
+      <div class="toolbar">
+        <button id="confirmation-cancel" class="secondary" type="button">Cancel</button>
+        <button id="confirmation-accept" type="button">Confirm</button>
+      </div>
+    </section>
+  </div>
+  <footer>ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. Export a CSV to back it up</footer>
+</body>
+</html>

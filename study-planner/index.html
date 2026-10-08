@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Degree Planner | ADU Tour Guide</title>
+<meta name="description" content="Plan your whole degree year by year and semester by semester. Track credits per semester and your running total toward graduation.">
+  <link rel="stylesheet" href="../shared.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="../shared.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <nav class="navbar" aria-label="Main navigation"><a class="site-brand" href="../index.html">ADU TourGuide</a><button class="hamburger" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">☰</button><ul id="navLinks"><li><a href="../index.html">Home</a></li><li><a href="../gpa-calculator/index.html">GPA Calculator</a></li><li><a href="../schedule-generator/index.html">Schedule Generator</a></li><li><a href="../study-planner/index.html" aria-current="page">Degree Planner</a></li><li><a href="../gpa-plan/index.html">GPA Planner</a></li><li><a href="../grade-plan/index.html">Grade Planner</a></li><li><a href="../project-split/index.html">Project Work Split</a></li></ul></nav>
+  <main id="main">
+    <h1>Degree Planner</h1>
+    <p class="lead">Your degree plan, semester by semester. Enter your courses and see your credits add up.</p>
+    <section class="panel planner-summary">
+      <label for="required">Credits required for my degree
+        <input id="required" type="text" inputmode="decimal" value="140">
+        <span id="required-print" class="print-cell">140</span>
+      </label>
+      <div class="summary-stats" aria-live="polite">
+        <div class="metric"><span>Total credits planned</span><div id="planned" class="result">0</div></div>
+        <div class="metric"><span id="balance-label">Credits remaining</span><div id="balance" class="result">140</div></div>
+      </div>
+      <label for="degree-progress">Planned credits toward your goal</label>
+      <progress id="degree-progress" max="100" value="0"></progress>
+      <p id="progress-text" class="muted"></p>
+      <div class="toolbar">
+        <button id="export" class="secondary">Export CSV</button>
+        <button id="import" class="secondary">Import CSV</button>
+        <button id="print" class="secondary">Print</button>
+        <button id="clear" class="danger">Clear all</button>
+      </div>
+      <input id="csv-file" type="file" accept=".csv,text/csv" hidden>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+    <div id="years"></div>
+    <div class="add-year"><button id="add-year">+ Add year</button></div>
+  </main>
+  <!-- On-page confirmations also work in embedded Site previews. -->
+  <div id="confirmation" class="confirmation-backdrop" hidden>
+    <section class="confirmation-card" role="alertdialog" aria-modal="true" aria-labelledby="confirmation-title" aria-describedby="confirmation-text">
+      <h2 id="confirmation-title">Confirm action</h2>
+      <p id="confirmation-text"></p>
+      <div class="toolbar">
+        <button id="confirm-cancel" class="secondary">Cancel</button>
+        <button id="confirm-yes">Confirm</button>
+      </div>
+    </section>
+  </div>
+  <footer>ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. Export a CSV to back it up</footer>
+</body>
+</html>

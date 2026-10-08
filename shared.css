@@ -1,0 +1,274 @@
+/* ADU TourGuide — handwritten dashboard styles.
+   Volt is visual inspiration only. No framework, imports, or build step.
+   Shared components go here; tool layout details stay in each style.css. */
+
+/* 1. Colors and the basic page canvas. */
+:root {
+  --navy: #0b233f;
+  --blue: #0ca2dd;
+  --red: #e7212b;
+  --ink: #12181f;
+  --muted: #596779;
+  --line: #e3e9f0;
+  --canvas: #f5f7fa;
+  --surface: #ffffff;
+  --blue-soft: #edf8fd;
+  --radius: 12px;
+  --shadow: 0 2px 5px rgba(11, 35, 63, 0.03), 0 8px 22px rgba(11, 35, 63, 0.04);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font: 15px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* 2. Existing fixed navbar and hamburger rules are preserved below. */
+.navbar {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+  background:var(--navy);
+  box-shadow:0 2px 12px #0b233f22}
+
+.navbar ul {
+  display:flex;
+  list-style:none;
+  padding:0;
+  margin:0;
+  justify-content:center}
+
+.navbar a {
+  display:block;
+  color:white;
+  text-decoration:none;
+  padding:18px 12px;
+  font-size:clamp(11px,1.3vw,15px);
+  white-space:nowrap}
+
+.navbar a:hover,.navbar a[aria-current] {
+  background:#0ca2dd33;
+  color:#7edcff}
+
+.hamburger {
+  display:none}
+@media(max-width:767px) {
+  .hamburger {
+  display:block;
+  margin:8px 12px 8px auto;
+  font-size:22px;
+  padding:2px 14px}
+.navbar ul {
+  display:none;
+  max-height:calc(100dvh - 58px);
+  overflow:auto}
+.navbar ul.show {
+  display:block}
+.navbar a {
+  font-size:15px;
+  padding:12px 20px;
+  text-align:left}
+
+
+
+
+}
+
+
+/* Site identity and consistent navigation order across every tool. */
+.navbar { display: grid; grid-template-columns: 1fr auto; align-items: center; }
+.navbar .site-brand { grid-column: 1; grid-row: 1; font-size: 19px; font-weight: 750; padding: 10px 24px; text-align: center; }
+.navbar ul { grid-column: 1 / -1; grid-row: 2; }
+
+@media (min-width: 1100px) {
+ .navbar { grid-template-columns: auto 1fr; }
+ .navbar .site-brand { text-align: left; }
+ .navbar ul { grid-column: 2; grid-row: 1; justify-content: flex-end; padding-right: 12px; }
+ .navbar ul a { font-size: 14px; padding: 18px 10px; }
+ 
+}
+@media (max-width: 767px) {
+ .navbar .site-brand { text-align: left; padding: 10px 16px; }
+ .navbar .hamburger { grid-column: 2; grid-row: 1; }
+ 
+}
+
+
+/* 3. Content spacing and typography. */
+main {
+  max-width: 1200px;
+  margin: 138px auto 48px;
+  padding: 0 28px;
+}
+
+h1 {
+  margin: 0 0 12px;
+  color: var(--navy);
+  font-size: clamp(28px, 3.2vw, 38px);
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+  font-weight: 750;
+}
+
+h2 {
+  margin: 0 0 18px;
+  color: var(--navy);
+  font-size: 20px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+h3 { color: var(--navy); font-size: 16px; line-height: 1.4; }
+p { margin: 0 0 16px; }
+.lead { max-width: 780px; margin-bottom: 28px; color: var(--muted); font-size: 16px; }
+.muted, small { color: var(--muted); }
+small { font-size: 13px; }
+.warning { color: var(--red); }
+
+/* 4. Reusable white cards, panels, and responsive grids. */
+.panel, .card {
+  min-width: 0;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.panel { margin: 24px 0; }
+.card { margin: 0; }
+.panel > :last-child, .card > :last-child { margin-bottom: 0; }
+.panel > h2:not(:first-child) { margin-top: 24px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+.toolbar, .fields { display: flex; flex-wrap: wrap; gap: 14px; align-items: end; }
+.toolbar { margin-bottom: 14px; }
+.fields { margin-bottom: 20px; }
+.fields label { flex: 1; min-width: 160px; }
+
+/* 5. Labels and inputs: a restrained border and visible focus state. */
+label { display: block; color: var(--navy); font-size: 13px; font-weight: 600; }
+input, select, textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  margin-top: 7px;
+  padding: 10px 13px;
+  border: 1px solid #ccd6e2;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  box-shadow: 0 1px 2px rgba(11, 35, 63, 0.035);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+input::placeholder, textarea::placeholder { color: #788596; opacity: 1; }
+input:hover, select:hover, textarea:hover { border-color: #98acbf; }
+input:focus, select:focus, textarea:focus { border-color: var(--blue); outline: 0; box-shadow: 0 0 0 3px rgba(12, 162, 221, 0.15); }
+textarea { min-height: 84px; resize: vertical; }
+input[type="checkbox"] { display: inline-block; width: 17px; min-height: 17px; height: 17px; margin: 0 6px 0 0; vertical-align: middle; accent-color: var(--blue); }
+input:disabled, select:disabled, textarea:disabled { background: var(--canvas); }
+
+/* 6. Buttons: blue actions, quiet secondary actions, red only for warnings. */
+button, .button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 42px;
+  padding: 10px 17px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--blue);
+  color: var(--navy);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(11, 35, 63, 0.07);
+  transition: background-color 150ms ease, box-shadow 150ms ease;
+}
+
+/* Navy text keeps small button labels readable on the bright brand blue. */
+button:hover, .button:hover { background: #69c8ed; box-shadow: 0 3px 8px rgba(11, 35, 63, 0.12); }
+button.secondary { background: #fff; border-color: #ccd6e2; color: var(--navy); box-shadow: 0 1px 2px rgba(11, 35, 63, 0.04); }
+button.secondary:hover { background: var(--blue-soft); border-color: var(--blue); }
+button.danger { background: #fff; border-color: var(--line); color: var(--muted); box-shadow: none; }
+button.danger:hover { background: #fff1f2; border-color: var(--red); color: var(--red); }
+button:disabled { opacity: 0.5; cursor: default; box-shadow: none; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+/* 7. Tables: a pale header, light dividers, and no heavy grid lines. */
+.table-wrap { width: 100%; overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; margin: 20px 0; }
+table { width: 100%; margin: 0; border-collapse: collapse; text-align: left; }
+th, td { padding: 15px 16px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+thead { background: #f8fafc; }
+th { color: var(--muted); font-size: 12px; font-weight: 650; }
+thead th { white-space: nowrap; }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: #f9fcfe; }
+td input, td select { min-width: 100px; margin-top: 0; }
+td:first-child input { min-width: 160px; }
+td button { white-space: nowrap; }
+
+/* 8. Number cards and compact badges, shared by GPA and project tools. */
+.metric {
+  padding: 22px;
+  margin: 18px 0;
+  background: var(--blue-soft);
+  border: 1px solid #dceef7;
+  border-radius: 10px;
+}
+
+.result { color: var(--navy); font-size: 32px; line-height: 1.25; font-weight: 750; font-variant-numeric: tabular-nums; letter-spacing: -0.6px; }
+.metric .result { margin: 8px 0; }
+.gpa-summary { width: min(100%, 320px); text-align: center; }
+.gpa-summary .result { font-size: 38px; }
+.gpa-summary > .muted { color: var(--navy); font-size: 13px; font-weight: 650; }
+.gpa-summary > div:last-child { color: var(--muted); font-size: 13px; }
+.pill { display: inline-block; padding: 5px 11px; border: 1px solid #dceef7; border-radius: 7px; background: var(--blue-soft); color: var(--navy); font-size: 12px; font-weight: 650; line-height: 1.3; }
+
+/* 9. Native progress bars: style both browser rendering engines. */
+progress { display: block; width: 100%; height: 9px; margin: 14px 0 0; border: 0; border-radius: 6px; overflow: hidden; appearance: none; background: #e2e9f1; color: var(--blue); accent-color: var(--blue); }
+progress::-webkit-progress-bar { border-radius: 6px; background: #e2e9f1; }
+progress::-webkit-progress-value { border-radius: 6px; background: var(--blue); }
+progress::-moz-progress-bar { border-radius: 6px; background: var(--blue); }
+
+/* 10. Generated schedule panels, feedback, and the footer. */
+details { margin: 12px 0; padding: 16px 18px; border: 1px solid var(--line); border-radius: 9px; background: #fff; }
+summary { color: var(--navy); font-size: 14px; font-weight: 600; cursor: pointer; }
+details[open] { background: #fbfdff; }
+.status { min-height: 25px; margin-top: 12px; font-size: 14px; }
+footer { max-width: 1200px; margin: 0 auto; padding: 24px 28px 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 12px; top: 70px; z-index: 2000; padding: 10px 14px; background: #fff; border-radius: 6px; }
+
+/* 11. Responsive content spacing; the menu breakpoint stays below 768px. */
+@media (min-width: 1100px) { main { margin-top: 105px; } }
+@media (max-width: 767px) {
+  main { margin-top: 88px; padding: 0 16px; }
+  .panel, .card { padding: 20px; }
+  .grid { grid-template-columns: 1fr; gap: 18px; }
+  .fields { gap: 16px; }
+  .fields label { min-width: 100%; }
+  .toolbar { gap: 10px; }
+  .toolbar button { flex: 1; }
+  th, td { padding: 12px; }
+  footer { padding: 20px 16px; }
+}
+
+/* Disable decorative transitions when the visitor asks for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  input, select, textarea, button, .button { transition: none; }
+}
+
+/* Generic button styles must not restyle the existing hamburger control. */
+.navbar .hamburger { background: var(--navy); color: #fff; border: 0; box-shadow: none; }
+.navbar .hamburger:hover { background: #0ca2dd33; }
