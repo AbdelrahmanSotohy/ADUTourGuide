@@ -1,2 +1,110 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b233f"><title>Project Work Split | ADU Tour Guide</title>
-<meta name="description" content="Split a group project into phases and tasks for up to 8 members. Track progress with checklists and stats, and export to CSV."><link rel="stylesheet" href="../shared.css"><link rel="stylesheet" href="style.css"><script defer src="../shared.js"></script><script defer src="../storage.js"></script><script defer src="../csv.js"></script><script defer src="script.js"></script></head><body><a class="skip" href="#main">Skip to content</a><nav class="navbar" aria-label="Main navigation"><a class="site-brand" href="../index.html">ADU TourGuide</a><button class="hamburger" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">☰</button><ul id="navLinks"><li><a href="../index.html">Home</a></li><li><a href="../gpa-calculator/index.html">GPA Calculator</a></li><li><a href="../schedule-generator/index.html">Schedule Generator</a></li><li><a href="../study-planner/index.html">Degree Planner</a></li><li><a href="../gpa-plan/index.html">GPA Planner</a></li><li><a href="../grade-plan/index.html">Grade Planner</a></li><li><a href="../project-split/index.html" aria-current="page">Project Work Split</a></li></ul></nav><main id="main"><h1>Project Work Split</h1><p class="lead">Give every phase an owner, track tasks, and keep your group moving.</p><section class="panel"><div class="toolbar"><button id="member">+ Add member</button><button id="phase">+ Add phase</button><button id="export" class="secondary">Export CSV</button><button id="import" class="secondary">Import CSV</button></div><p class="muted">Up to eight members. Phases are shared across every member. Removing a member or phase removes its tasks.</p><div id="setup"></div></section><section class="panel"><h2>Project progress</h2><div id="stats"></div></section><div id="members" class="grid"></div><div id="status" class="status" role="status" aria-live="polite"></div></main><footer>ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. Export a CSV to back it up</footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b233f">
+
+  <title>Project Work Split | ADU Tour Guide</title>
+  <meta
+    name="description"
+    content="Split a group project into phases and tasks for up to 8 members. Track progress with checklists and stats, and export to CSV."
+  >
+
+  <link rel="icon" type="image/png" href="../images/TourGuide.png">
+
+  <link rel="stylesheet" href="../shared.css">
+  <link rel="stylesheet" href="style.css">
+
+  <script defer src="../shared.js"></script>
+  <script defer src="../storage.js"></script>
+  <script defer src="../csv.js"></script>
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <nav class="navbar" aria-label="Main navigation">
+    <a class="site-brand" href="../index.html">ADU TourGuide</a>
+
+    <button
+      class="hamburger"
+      aria-label="Toggle navigation"
+      aria-controls="navLinks"
+      aria-expanded="false"
+    >
+      ☰
+    </button>
+
+    <ul id="navLinks">
+      <li>
+        <a href="../index.html">Home</a>
+      </li>
+      <li>
+        <a href="../gpa-calculator/index.html">GPA Calculator</a>
+      </li>
+      <li>
+        <a href="../schedule-generator/index.html">Schedule Generator</a>
+      </li>
+      <li>
+        <a href="../study-planner/index.html">Degree Planner</a>
+      </li>
+      <li>
+        <a href="../gpa-plan/index.html">GPA Planner</a>
+      </li>
+      <li>
+        <a href="../grade-plan/index.html">Grade Planner</a>
+      </li>
+      <li>
+        <a href="../project-split/index.html" aria-current="page">
+          Project Work Split
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <main id="main">
+    <h1>Project Work Split</h1>
+
+    <p class="lead">
+      Give every phase an owner, track tasks, and keep your group moving.
+    </p>
+
+    <section class="panel">
+      <div class="toolbar">
+        <button id="member">+ Add member</button>
+        <button id="phase">+ Add phase</button>
+        <button id="export" class="secondary">Export CSV</button>
+        <button id="import" class="secondary">Import CSV</button>
+      </div>
+
+      <p class="muted">
+        Up to eight members. Phases are shared across every member.
+        Removing a member or phase removes its tasks.
+      </p>
+
+      <div id="setup"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Project progress</h2>
+      <div id="stats"></div>
+    </section>
+
+    <div id="members" class="grid"></div>
+
+    <div
+      id="status"
+      class="status"
+      role="status"
+      aria-live="polite"
+    ></div>
+  </main>
+
+  <footer>
+    ADU Tour Guide · Your all-in-one University app · Your data stays
+    in this browser. Export a CSV to back it up
+  </footer>
+</body>
+</html>

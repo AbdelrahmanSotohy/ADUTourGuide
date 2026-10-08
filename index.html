@@ -1,7 +1,181 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b233f"><title>ADU Tour Guide | Your all-in-one university companion</title>
-<meta name="description" content="Free GPA calculator, grade and GPA planners, schedule generator, degree planner and group project splitter for university students. No sign-up needed."><link rel="stylesheet" href="shared.css"><link rel="stylesheet" href="style.css"><script defer src="shared.js"></script><script defer src="storage.js"></script><script defer src="csv.js"></script><script defer src="script.js"></script></head><body><a class="skip" href="#main">Skip to content</a><nav class="navbar" aria-label="Main navigation"><a class="site-brand" href="index.html">ADU TourGuide</a><button class="hamburger" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">☰</button><ul id="navLinks"><li><a href="index.html" aria-current="page">Home</a></li><li><a href="gpa-calculator/index.html">GPA Calculator</a></li><li><a href="schedule-generator/index.html">Schedule Generator</a></li><li><a href="study-planner/index.html">Degree Planner</a></li><li><a href="gpa-plan/index.html">GPA Planner</a></li><li><a href="grade-plan/index.html">Grade Planner</a></li><li><a href="project-split/index.html">Project Work Split</a></li></ul></nav><main id="main"><h1>ADU Tour Guide</h1><p class="lead">Your semester, your plan. Six practical tools to turn academic goals into a clear path.</p><div class="grid"><article class="card"><span class="pill">01</span><h2>GPA Calculator</h2><p>Calculate your credit-weighted GPA using the ADU grade scale.</p><a class="button" href="gpa-calculator/index.html">Open tool →</a></article><article class="card"><span class="pill">02</span><h2>Schedule Generator</h2><p>Find weekly combinations of your chosen course sections without timing conflicts.</p><a class="button" href="schedule-generator/index.html">Open tool →</a></article><article class="card"><span class="pill">03</span><h2>Degree Planner</h2><p>Map your four-year journey, one semester at a time.</p><a class="button" href="study-planner/index.html">Open tool →</a></article><article class="card"><span class="pill">04</span><h2>GPA Planner</h2><p>Explore the grades you need this semester to reach your cumulative GPA goal.</p><a class="button" href="gpa-plan/index.html">Open tool →</a></article><article class="card"><span class="pill">05</span><h2>Grade Planner</h2><p>See what you need on your remaining work to reach each grade tier.</p><a class="button" href="grade-plan/index.html">Open tool →</a></article><article class="card"><span class="pill">06</span><h2>Project Work Split</h2><p>Give every phase an owner, track tasks, and keep your group moving.</p><a class="button" href="project-split/index.html">Open tool →</a></article></div><section class="panel" aria-labelledby="about-heading">
-<h2 id="about-heading">About</h2>
-<p>ADU Tour Guide is your all-in-one uni app. It brings together a GPA calculator, grade and GPA targets, a schedule generator, a degree planner and a group project splitter, so you can plan your semester and your degree in one place.</p>
-<p>It’s free, needs no sign-up, and your data stays in your browser. Export a CSV any time to back it up or move it to another device.</p>
-<p>Built by Abdelrahman Sotohy. Found a bug or have an idea? Message me on <a href="https://www.linkedin.com/in/abdelrahman-sotohy-6986b8369/">LinkedIn</a>.</p>
-</section><div id="status" class="status" role="status" aria-live="polite"></div></main><footer>ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. Export a CSV to back it up</footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b233f">
+
+  <title>ADU Tour Guide | Your all-in-one university companion</title>
+  <meta
+    name="description"
+    content="Free GPA calculator, grade and GPA planners, schedule generator, degree planner and group project splitter for university students. No sign-up needed."
+  >
+
+  <link rel="icon" type="image/png" href="images/TourGuide.png">
+
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="style.css">
+
+  <script defer src="shared.js"></script>
+  <script defer src="storage.js"></script>
+  <script defer src="csv.js"></script>
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <nav class="navbar" aria-label="Main navigation">
+    <a class="site-brand" href="index.html">ADU TourGuide</a>
+
+    <button
+      class="hamburger"
+      aria-label="Toggle navigation"
+      aria-controls="navLinks"
+      aria-expanded="false"
+    >
+      ☰
+    </button>
+
+    <ul id="navLinks">
+      <li>
+        <a href="index.html" aria-current="page">Home</a>
+      </li>
+      <li>
+        <a href="gpa-calculator/index.html">GPA Calculator</a>
+      </li>
+      <li>
+        <a href="schedule-generator/index.html">Schedule Generator</a>
+      </li>
+      <li>
+        <a href="study-planner/index.html">Degree Planner</a>
+      </li>
+      <li>
+        <a href="gpa-plan/index.html">GPA Planner</a>
+      </li>
+      <li>
+        <a href="grade-plan/index.html">Grade Planner</a>
+      </li>
+      <li>
+        <a href="project-split/index.html">Project Work Split</a>
+      </li>
+    </ul>
+  </nav>
+
+  <main id="main">
+    <h1>ADU Tour Guide</h1>
+
+    <p class="lead">
+      Your semester, your plan. Six practical tools to turn academic
+      goals into a clear path.
+    </p>
+
+    <div class="grid">
+      <article class="card">
+        <span class="pill">01</span>
+        <h2>GPA Calculator</h2>
+        <p>
+          Calculate your credit-weighted GPA using the ADU grade scale.
+        </p>
+        <a class="button" href="gpa-calculator/index.html">
+          Open tool →
+        </a>
+      </article>
+
+      <article class="card">
+        <span class="pill">02</span>
+        <h2>Schedule Generator</h2>
+        <p>
+          Find weekly combinations of your chosen course sections
+          without timing conflicts.
+        </p>
+        <a class="button" href="schedule-generator/index.html">
+          Open tool →
+        </a>
+      </article>
+
+      <article class="card">
+        <span class="pill">03</span>
+        <h2>Degree Planner</h2>
+        <p>
+          Map your four-year journey, one semester at a time.
+        </p>
+        <a class="button" href="study-planner/index.html">
+          Open tool →
+        </a>
+      </article>
+
+      <article class="card">
+        <span class="pill">04</span>
+        <h2>GPA Planner</h2>
+        <p>
+          Explore the grades you need this semester to reach your
+          cumulative GPA goal.
+        </p>
+        <a class="button" href="gpa-plan/index.html">
+          Open tool →
+        </a>
+      </article>
+
+      <article class="card">
+        <span class="pill">05</span>
+        <h2>Grade Planner</h2>
+        <p>
+          See what you need on your remaining work to reach each
+          grade tier.
+        </p>
+        <a class="button" href="grade-plan/index.html">
+          Open tool →
+        </a>
+      </article>
+
+      <article class="card">
+        <span class="pill">06</span>
+        <h2>Project Work Split</h2>
+        <p>
+          Give every phase an owner, track tasks, and keep your
+          group moving.
+        </p>
+        <a class="button" href="project-split/index.html">
+          Open tool →
+        </a>
+      </article>
+    </div>
+
+    <section class="panel" aria-labelledby="about-heading">
+      <h2 id="about-heading">About</h2>
+
+      <p>
+        ADU Tour Guide is your all-in-one uni app. It brings together
+        a GPA calculator, grade and GPA targets, a schedule generator,
+        a degree planner and a group project splitter, so you can plan
+        your semester and your degree in one place.
+      </p>
+
+      <p>
+        It’s free, needs no sign-up, and your data stays in your browser.
+        Export a CSV any time to back it up or move it to another device.
+      </p>
+
+      <p>
+        Built by Abdelrahman Sotohy. Found a bug or have an idea?
+        Message me on
+        <a href="https://www.linkedin.com/in/abdelrahman-sotohy-6986b8369/">
+          LinkedIn</a>.
+      </p>
+    </section>
+
+    <div
+      id="status"
+      class="status"
+      role="status"
+      aria-live="polite"
+    ></div>
+  </main>
+
+  <footer>
+    ADU Tour Guide · Your all-in-one University app · Your data stays
+    in this browser. Export a CSV to back it up
+  </footer>
+</body>
+</html>

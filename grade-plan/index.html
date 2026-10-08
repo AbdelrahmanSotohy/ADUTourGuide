@@ -1,2 +1,151 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b233f"><title>Grade Planner | ADU Tour Guide</title>
-<meta name="description" content="Enter your scores so far in a course and see what you need on the remaining work to reach each grade, from D to A."><link rel="stylesheet" href="../shared.css"><link rel="stylesheet" href="style.css"><script defer src="../shared.js"></script><script defer src="../storage.js"></script><script defer src="../csv.js"></script><script defer src="../table.js"></script><script defer src="script.js"></script></head><body><a class="skip" href="#main">Skip to content</a><nav class="navbar" aria-label="Main navigation"><a class="site-brand" href="../index.html">ADU TourGuide</a><button class="hamburger" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">☰</button><ul id="navLinks"><li><a href="../index.html">Home</a></li><li><a href="../gpa-calculator/index.html">GPA Calculator</a></li><li><a href="../schedule-generator/index.html">Schedule Generator</a></li><li><a href="../study-planner/index.html">Degree Planner</a></li><li><a href="../gpa-plan/index.html">GPA Planner</a></li><li><a href="../grade-plan/index.html" aria-current="page">Grade Planner</a></li><li><a href="../project-split/index.html">Project Work Split</a></li></ul></nav><main id="main"><h1>Grade Planner</h1><p class="lead">See what you need on your remaining work to reach each grade tier.</p><section class="panel"><div class="fields"><label>Course name<input id="course" placeholder="e.g. Data Structures and Algorithms"></label><label>Remaining course weight (%)<input id="remaining" type="number" min="0" max="100" step="any"></label></div><p class="muted">For each completed assessment, enter earned points, possible points, and its percentage weight in the final course grade. Completed weights plus remaining weight must total 100%. Results use exact percentage thresholds without assuming rounding.</p><div class="toolbar"><button id="add">+ Add row</button><button id="export" class="secondary">Export CSV</button><button id="import" class="secondary">Import CSV</button></div><p class="muted"><small>Import replaces this tool’s current data after the entire file is validated.</small></p><div class="table-wrap"><table><thead><tr><th>Assessment</th><th>Earned points</th><th>Possible points</th><th>Weight (%)</th><th>Action</th></tr></thead><tbody id="rows"></tbody></table></div></section><section class="panel"><h2>Required on remaining work</h2><div id="results"></div></section><div id="status" class="status" role="status" aria-live="polite"></div></main><footer>ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. Export a CSV to back it up</footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b233f">
+
+  <title>Grade Planner | ADU Tour Guide</title>
+  <meta
+    name="description"
+    content="Enter your scores so far in a course and see what you need on the remaining work to reach each grade, from D to A."
+  >
+
+  <link rel="icon" type="image/png" href="../images/TourGuide.png">
+
+  <link rel="stylesheet" href="../shared.css">
+  <link rel="stylesheet" href="style.css">
+
+  <script defer src="../shared.js"></script>
+  <script defer src="../storage.js"></script>
+  <script defer src="../csv.js"></script>
+  <script defer src="../table.js"></script>
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <nav class="navbar" aria-label="Main navigation">
+    <a class="site-brand" href="../index.html">ADU TourGuide</a>
+
+    <button
+      class="hamburger"
+      aria-label="Toggle navigation"
+      aria-controls="navLinks"
+      aria-expanded="false"
+    >
+      ☰
+    </button>
+
+    <ul id="navLinks">
+      <li>
+        <a href="../index.html">Home</a>
+      </li>
+      <li>
+        <a href="../gpa-calculator/index.html">GPA Calculator</a>
+      </li>
+      <li>
+        <a href="../schedule-generator/index.html">Schedule Generator</a>
+      </li>
+      <li>
+        <a href="../study-planner/index.html">Degree Planner</a>
+      </li>
+      <li>
+        <a href="../gpa-plan/index.html">GPA Planner</a>
+      </li>
+      <li>
+        <a href="../grade-plan/index.html" aria-current="page">
+          Grade Planner
+        </a>
+      </li>
+      <li>
+        <a href="../project-split/index.html">Project Work Split</a>
+      </li>
+    </ul>
+  </nav>
+
+  <main id="main">
+    <h1>Grade Planner</h1>
+
+    <p class="lead">
+      See what you need on your remaining work to reach each grade tier.
+    </p>
+
+    <section class="panel">
+      <div class="fields">
+        <label>
+          Course name
+          <input
+            id="course"
+            placeholder="e.g. Data Structures and Algorithms"
+          >
+        </label>
+
+        <label>
+          Remaining course weight (%)
+          <input
+            id="remaining"
+            type="number"
+            min="0"
+            max="100"
+            step="any"
+          >
+        </label>
+      </div>
+
+      <p class="muted">
+        For each completed assessment, enter earned points, possible
+        points, and its percentage weight in the final course grade.
+        Completed weights plus remaining weight must total 100%.
+        Results use exact percentage thresholds without assuming rounding.
+      </p>
+
+      <div class="toolbar">
+        <button id="add">+ Add row</button>
+        <button id="export" class="secondary">Export CSV</button>
+        <button id="import" class="secondary">Import CSV</button>
+      </div>
+
+      <p class="muted">
+        <small>
+          Import replaces this tool’s current data after the entire
+          file is validated.
+        </small>
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Assessment</th>
+              <th>Earned points</th>
+              <th>Possible points</th>
+              <th>Weight (%)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Required on remaining work</h2>
+      <div id="results"></div>
+    </section>
+
+    <div
+      id="status"
+      class="status"
+      role="status"
+      aria-live="polite"
+    ></div>
+  </main>
+
+  <footer>
+    ADU Tour Guide · Your all-in-one University app · Your data stays
+    in this browser. Export a CSV to back it up
+  </footer>
+</body>
+</html>
