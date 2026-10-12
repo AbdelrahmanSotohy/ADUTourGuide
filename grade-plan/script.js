@@ -11,7 +11,6 @@ let data = Storage.load('grade-plan', {
 const save = Storage.debounce('grade-plan', () => data);
 $('#course').value = data.course;
 $('#remaining').value = data.remaining;
-const headers = ['Course', 'Remaining Weight', 'Assessment', 'Earned', 'Possible', 'Weight'];
 
 function validate(r) {
   const total = ADU.number(r.total, 0.000001);
@@ -76,28 +75,4 @@ $('#add').onclick = () => {
   render();
   save()
 };
-$('#export').onclick = () => CSV.export('grade-plan', headers, data.rows.length ? data.rows.map(r => [data.course, data.remaining, r.name, r.earned, r.total, r.weight]) : [
-  [data.course, data.remaining, '', '', '', '']
-]);
-$('#import').onclick = () => CSV.import(headers, rows => {
-  if (!rows.length) throw Error('CSV must include course settings.');
-  if (rows.some(r => r[0] !== rows[0][0] || r[1] !== rows[0][1])) throw Error('Course settings must be consistent.');
-  let next = {
-    course: rows[0][0],
-    remaining: ADU.number(rows[0][1], 0, 100),
-    rows: rows.filter(r => r.slice(2).some(v => v !== '')).map(r => ({
-      name: r[2],
-      earned: r[3],
-      total: r[4],
-      weight: r[5]
-    }))
-  };
-  next.rows.forEach(validate);
-  if (Math.abs(next.rows.reduce((s, r) => s + Number(r.weight), 0) + next.remaining - 100) > 1e-6) throw Error('Weights must total 100%.');
-  data = next;
-  $('#course').value = data.course;
-  $('#remaining').value = data.remaining;
-  render();
-  save()
-});
 render();

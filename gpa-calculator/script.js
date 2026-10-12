@@ -1,29 +1,45 @@
 'use strict';
 // Migrate the original course-only save without discarding existing rows.
 const saved = Storage.load('gpa-calculator', null);
-let data = Array.isArray(saved) ? saved : saved?.courses ?? [{ name: '', grade: 'A', credits: 3 }];
+let data = Array.isArray(saved) ? saved : saved?.courses ?? [{
+  name: '',
+  grade: 'A',
+  credits: 3
+}];
 let priorSettings = !Array.isArray(saved) && saved ? {
   currentGpa: saved.currentGpa ?? '',
   completedCredits: saved.completedCredits ?? ''
-} : { currentGpa: '', completedCredits: '' };
-const headers = ['Current GPA', 'Completed Credits', 'Course', 'Grade', 'Credits'];
-const legacyHeaders = ['Course', 'Grade', 'Credits'];
-const creditOptions = Array.from({ length: 17 }, (_, i) => i / 2);
-const save = Storage.debounce('gpa-calculator', () => ({ ...priorSettings, courses: data }));
+} : {
+  currentGpa: '',
+  completedCredits: ''
+};
+const creditOptions = Array.from({
+  length: 17
+}, (_, i) => i / 2);
+const save = Storage.debounce('gpa-calculator', () => ({
+  ...priorSettings,
+  courses: data
+}));
 
 function courseCredits(value) {
   const credits = ADU.number(value, 0, 8);
   if (!creditOptions.includes(credits)) throw Error('Choose course credit hours from 0 to 8 in steps of 0.5.');
   return credits;
 }
+
 function priorGpa(value) {
   if (String(value.currentGpa).trim() === '' || String(value.completedCredits).trim() === '') {
     throw Error('Enter your current GPA and completed credit hours for Cumulative GPA. Enter 0 for both if you have no completed credits.');
   }
-  return { credits: ADU.number(value.completedCredits, 0), gpa: ADU.number(value.currentGpa, 0, 4) };
+  return {
+    credits: ADU.number(value.completedCredits, 0),
+    gpa: ADU.number(value.currentGpa, 0, 4)
+  };
 }
+
 function calc() {
-  let credits = 0, points = 0;
+  let credits = 0,
+    points = 0;
   try {
     data.forEach(row => {
       const c = courseCredits(row.credits);
@@ -53,6 +69,7 @@ function calc() {
     notice(error.message, true);
   }
 }
+
 function render() {
   $('#current-gpa').value = priorSettings.currentGpa;
   $('#completed-credits').value = priorSettings.completedCredits;
@@ -68,38 +85,34 @@ $('#rows').oninput = e => {
   const t = e.target;
   if (t.dataset.field) {
     data[t.dataset.i][t.dataset.field] = t.value;
-    calc(); save();
+    calc();
+    save();
   }
 };
 $('#rows').onclick = e => {
   if (e.target.dataset.remove !== undefined) {
     data.splice(Number(e.target.dataset.remove), 1);
-    render(); save();
+    render();
+    save();
   }
 };
-$('#current-gpa').oninput = e => { priorSettings.currentGpa = e.target.value; calc(); save(); };
-$('#completed-credits').oninput = e => { priorSettings.completedCredits = e.target.value; calc(); save(); };
-$('#add').onclick = () => { data.push({ name: '', grade: 'A', credits: 3 }); render(); save(); };
-$('#export').onclick = () => {
-  const rows = data.length ? data.map(r => [priorSettings.currentGpa, priorSettings.completedCredits, r.name, r.grade, r.credits]) : [[priorSettings.currentGpa, priorSettings.completedCredits, '', '', '']];
-  CSV.export('adu-gpa-courses', headers, rows);
+$('#current-gpa').oninput = e => {
+  priorSettings.currentGpa = e.target.value;
+  calc();
+  save();
 };
-$('#import').onclick = () => CSV.import(headers, (rows, actualHeaders = headers) => {
-  const legacy = actualHeaders.length === legacyHeaders.length;
-  let nextHistory = { ...priorSettings };
-  if (!legacy) {
-    if (!rows.length) throw Error('CSV must contain GPA settings.');
-    nextHistory = { currentGpa: rows[0][0], completedCredits: rows[0][1] };
-    priorGpa(nextHistory);
-    if (rows.some(r => r[0] !== rows[0][0] || r[1] !== rows[0][1])) throw Error('Current GPA and completed credits must be consistent across CSV rows.');
-  }
-  const courseRows = legacy ? rows : rows.filter(r => r.slice(2).some(v => v !== '')).map(r => r.slice(2));
-  const next = courseRows.map(([name, grade, credits]) => {
-    if (!Object.hasOwn(ADU.grades, grade)) throw Error('Unknown ADU grade: ' + grade);
-    return { name, grade, credits: courseCredits(credits) };
+$('#completed-credits').oninput = e => {
+  priorSettings.completedCredits = e.target.value;
+  calc();
+  save();
+};
+$('#add').onclick = () => {
+  data.push({
+    name: '',
+    grade: 'A',
+    credits: 3
   });
-  // Assign only after every setting and row passes validation.
-  data = next; priorSettings = nextHistory;
-  render(); save();
-}, legacyHeaders);
+  render();
+  save();
+};
 render();

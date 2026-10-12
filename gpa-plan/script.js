@@ -25,7 +25,7 @@ $$('input,select').filter(el => el.id).forEach(el => el.oninput = () => {
   invalidate();
   if (el.id === 'count') {
     const n = Number(el.value);
-    if (Number.isInteger(n) && n >= 1 && n <= 12) {
+    if (Number.isInteger(n) && n >= 1 && n <= 8) {
       data.credits = Array.from({
         length: n
       }, (_, i) => data.credits[i] ?? 3);
@@ -47,8 +47,8 @@ function valid(d) {
   ADU.number(d.current, 0, 4);
   ADU.number(d.completed, 0);
   ADU.number(d.target, 0, 4);
-  const n = ADU.number(d.count, 1, 12);
-  if (!Number.isInteger(n) || d.credits.length !== n || !['target', 'same', 'increase'].includes(d.goal)) throw Error('Choose 1–12 courses and a valid goal.');
+  const n = ADU.number(d.count, 1, 8);
+  if (!Number.isInteger(n) || d.credits.length !== n || !['target', 'same', 'increase'].includes(d.goal)) throw Error('Choose 1–8 courses and a valid goal.');
   d.credits.forEach(c => ADU.number(c, 0.5))
 }
 $('#calculate').onclick = () => {
@@ -64,6 +64,7 @@ $('#calculate').onclick = () => {
       required = goal * denom - base;
     const grades = Object.entries(ADU.grades);
     const creditGroups = [...new Set(credits)];
+
     function gradeCounts(combo, credit) {
       return grades.map(([grade]) => {
         const count = combo.filter((g, i) => g === grade && credits[i] === credit).length;
@@ -127,24 +128,4 @@ $('#calculate').onclick = () => {
     notice(e.message, true)
   }
 };
-const headers = ['Current GPA', 'Completed Credits', 'Goal', 'Target GPA', 'Course', 'Credits'];
-$('#export').onclick = () => CSV.export('gpa-plan', headers, data.credits.map((c, i) => [data.current, data.completed, data.goal, data.target, i + 1, c]));
-$('#import').onclick = () => CSV.import(headers, rows => {
-  if (!rows.length) throw Error('CSV must have at least one course.');
-  const first = rows[0];
-  if (rows.some((r, i) => r.slice(0, 4).join('|') !== first.slice(0, 4).join('|') || Number(r[4]) !== i + 1)) throw Error('Use consistent settings and sequential course numbers.');
-  const next = {
-    current: first[0],
-    completed: first[1],
-    goal: first[2],
-    target: first[3],
-    count: rows.length,
-    credits: rows.map(r => r[5])
-  };
-  valid(next);
-  data = next;
-  invalidate();
-  render();
-  save()
-});
 render();

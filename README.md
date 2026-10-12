@@ -1,51 +1,28 @@
 # ADU Tour Guide
 
-I built ADU Tour Guide to help students plan their semester and degree in one place. It includes six tools for tracking grades, planning courses, finding schedules and splitting group projects.
+Independent static student toolkit. No dependencies, build step, accounts, or backend.
 
-The whole site uses plain HTML, CSS and JavaScript. It’s free, needs no sign-up, and runs without a backend, frameworks or a build step.
+## Run
+Open `index.html` or serve this folder with VS Code Live Server / `python3 -m http.server 8000`. For GitHub Pages, upload the contents of this folder to the repository, then enable Pages for that branch and folder. Relative links support repository subpaths.
 
+## Included tools
+- GPA Calculator: current cumulative GPA and completed GPA credits plus added courses, live updates, 0–8 course-credit dropdown in 0.5 steps, ADU grade table, and a compact centered result. CSV includes prior GPA settings; original course-only CSV files remain supported and preserve the current prior-GPA settings. Existing course-list saves migrate automatically.
+- Schedule Generator: one block per CSV row; same Course + Section groups meetings. All chosen courses receive one section; same-day overlap is rejected, touching times allowed. Search generates every schedule up to 2 million search states or 10,000 schedules and offers pages of 50 results. Narrow sections for larger searches.
+- Degree Planner: four years × Fall / Spring / Summer / Winter, manual placement using year/semester selectors; semester and year credit totals.
+- Project Work Split: 8 members maximum, shared phases, task/checklist/date/notes, phase and member progress, least-completed phase flags. Unique member and phase names are required for CSV.
+- GPA Planner: cumulative weighted calculation requires completed GPA credits. 1–12 semester courses, individual credit hours. Search displays at most 200 examples and visits at most 500,000 states, with explicit truncation messages.
+- Grade Planner: earned/possible × assessment weight; weights including remaining must total 100. Needed remaining average = (grade threshold − weighted points earned) / remaining weight × 100.
 
-## Tools
-
-- **GPA Calculator:** Calculate your semester and cumulative GPA using ADU’s grading scale. Enter your current GPA, completed credit hours and this semester’s courses.
-- **Schedule Generator:** Add courses and their available sections, then generate schedules without overlapping lecture times. View the results as weekly timetables.
-- **Degree Planner:** Plan courses year by year, with live semester totals and cumulative credits. Start with Fall and Spring, and add Winter or Summer when needed.
-- **GPA Planner:** Enter your current GPA, completed credits and target GPA to see possible grade combinations. Courses with the same credit hours are grouped to avoid duplicate results.
-- **Grade Planner:** Enter your assessment scores and weights to see what you need on the remaining work to reach each grade.
-- **Project Work Split:** Organize tasks across shared project phases for up to eight members. Track completion by member, phase and overall progress.
-
-## ADU grading scale
-
+## ADU scale supplied for this project
 A 4.0 (90+), B+ 3.5 (85+), B 3.0 (80+), C+ 2.5 (75+), C 2.0 (70+), D+ 1.5 (65+), D 1.0 (60+), F 0.0 (below 60).
 
-## Saving your data
+## Data and CSV
+Each tool uses its own `adu-tour-guide:` localStorage key with 350 ms debounce and page-exit flush. Storage errors are shown; use CSV backups. Different browsers, domains, and devices have separate data. Imports validate the complete file before replacing state; use a previously exported CSV with exact headers. UTF-8 BOM, commas, quotes, and multiline notes are supported through Blob and FileReader, without libraries. Keep backups before imports. Avoid running untrusted CSV text as spreadsheet formulas; CSV files are intended for this app's reimport.
 
-Your inputs save automatically in your browser using localStorage. Each tool saves its data separately.
+## Shared files
+`shared.css` / `shared.js`: common theme and fixed responsive navigation. `storage.js` / `csv.js`: persistence and CSV helpers. `table.js`: reusable row editor. Each page has its own index.html, style.css, script.js, with shared assets loaded first.
 
-Saved inputs aren’t included in the project files and don’t automatically transfer between browsers, devices or website addresses. Clearing your browser’s site data will also remove them.
+No data is sent to a server. Personal student planning estimates do not account for repeat-course policies, transcript exceptions, or prerequisites.
 
-Use **Export CSV** to keep a backup, then **Import CSV** to restore it or move it to another device. For imports, use the format exported by the tool.
-
-## Project structure
-
-Each tool has its own folder containing:
-
-- `index.html`
-- `style.css`
-- `script.js`
-
-The root folder contains the home page and shared files:
-
-- `shared.css` and `shared.js` for common styling and the responsive navbar.
-- `storage.js` and `csv.js` for saving data and handling CSV files.
-- `table.js` for reusable table editing.
-
-## A quick note
-
-This is a personal student project for planning and estimates. It doesn’t check prerequisites, degree requirements, repeat-course policies or transcript exceptions.
-
-## About me
-
-Built by **Abdelrahman Sotohy**.
-
-Found a bug or have an idea? Message me on [LinkedIn](https://www.linkedin.com/in/abdelrahman-sotohy-6986b8369/).
+## Verification
+Run `node tests/verify.cjs` for dependency-free calculation, CSV, and asset checks. Browser visual and responsive checks require a real browser and were not run in the delivery environment because Chromium was unavailable.

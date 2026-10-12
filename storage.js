@@ -13,7 +13,7 @@ const Storage = {
       localStorage.setItem('adu-tour-guide:' + key, JSON.stringify(data));
       return true
     } catch {
-      notice('Auto-save is unavailable. Export CSV to keep a copy.', true);
+      notice('Auto-save is unavailable. Your changes may not be saved in this browser.', true);
       return false
     }
   },

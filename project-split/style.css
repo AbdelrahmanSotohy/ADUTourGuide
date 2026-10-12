@@ -1,10 +1,42 @@
 /* Member task cards: phases are separated by quiet horizontal dividers. */
-.task { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
-.task h3 { margin: 0 0 16px; }
-.task label { margin: 12px 0; }
-#setup h2 { margin-top: 28px; }
-#setup .fields { margin-bottom: 14px; }
-#stats .grid { gap: 20px; margin-top: 22px; }
-#stats .grid > div { padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px; background: #fbfcfe; }
-#members .card > h2 { margin-bottom: 12px; }
-#members .card > .pill { align-self: flex-start; }
+.task {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.task h3 {
+  margin: 0 0 16px;
+}
+
+.task label {
+  margin: 12px 0;
+}
+
+#setup h2 {
+  margin-top: 28px;
+}
+
+#setup .fields {
+  margin-bottom: 14px;
+}
+
+#stats .grid {
+  gap: 20px;
+  margin-top: 22px;
+}
+
+#stats .grid>div {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfe;
+}
+
+#members .card>h2 {
+  margin-bottom: 12px;
+}
+
+#members .card>.pill {
+  align-self: flex-start;
+}
