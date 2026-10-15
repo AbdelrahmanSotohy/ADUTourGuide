@@ -12,18 +12,19 @@ const save = Storage.debounce('grade-plan', () => data);
 $('#course').value = data.course;
 $('#remaining').value = data.remaining;
 
-function validate(r) {
-  const total = ADU.number(r.total, 0.000001);
-  ADU.number(r.earned, 0, total);
-  ADU.number(r.weight, 0, 100)
+function validate(r, i) {
+  const total = Fields.number(r.total, 0.000001, Infinity, `[data-i="${i}"][data-field="total"]`);
+  Fields.number(r.earned, 0, total, `[data-i="${i}"][data-field="earned"]`);
+  Fields.number(r.weight, 0, 100, `[data-i="${i}"][data-field="weight"]`)
 }
 
 function calc() {
+  Fields.clearAll();
   try {
     data.rows.forEach(validate);
-    let remaining = ADU.number(data.remaining, 0, 100),
+    let remaining = Fields.number(data.remaining, 0, 100, '#remaining'),
       weight = data.rows.reduce((s, r) => s + Number(r.weight), 0);
-    if (Math.abs(weight + remaining - 100) > 0.000001) throw Error('Completed weights plus remaining weight must equal 100%. Currently ' + (weight + remaining) + '%.');
+    if (Math.abs(weight + remaining - 100) > 0.000001) Fields.fail('#remaining', 'Completed weights plus remaining weight must equal 100%. Currently ' + (weight + remaining) + '%.');
     const earned = data.rows.reduce((s, r) => s + Number(r.earned) / Number(r.total) * Number(r.weight), 0);
     $('#results').innerHTML = `<div class="metric">Earned toward final grade: <strong>${earned.toFixed(2)} / 100</strong></div><div class="table-wrap"><table><thead><tr><th>Grade</th><th>Threshold</th><th>Needed on remaining work</th><th>Needed out of remaining weight</th><th>Outcome</th></tr></thead><tbody>${Object.entries(ADU.tiers).map(([g,threshold])=>{const need=remaining?(threshold-earned)/remaining*100:Infinity;const achieved=earned>=threshold;
     // Weighted points needed: e.g. 30 out of a remaining 45, or 66.67%.
@@ -33,7 +34,7 @@ function calc() {
     notice('')
   } catch (e) {
     $('#results').textContent = 'Complete valid assessment inputs to calculate targets.';
-    notice(e.message, true)
+    notice(e, true)
   }
 }
 

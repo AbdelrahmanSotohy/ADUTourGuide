@@ -28,22 +28,28 @@ function courseCredits(value) {
 }
 
 function priorGpa(value) {
-  if (String(value.currentGpa).trim() === '' || String(value.completedCredits).trim() === '') {
-    throw Error('Enter your current GPA and completed credit hours for Cumulative GPA. Enter 0 for both if you have no completed credits.');
-  }
+  if (String(value.currentGpa).trim() === '') Fields.fail('#current-gpa', 'Enter your current GPA, or 0 if you have no completed credits.');
+  if (String(value.completedCredits).trim() === '') Fields.fail('#completed-credits', 'Enter completed credit hours, or 0 if you have none.');
   return {
-    credits: ADU.number(value.completedCredits, 0),
-    gpa: ADU.number(value.currentGpa, 0, 4)
+    credits: Fields.number(value.completedCredits, 0, Infinity, '#completed-credits'),
+    gpa: Fields.number(value.currentGpa, 0, 4, '#current-gpa')
   };
 }
 
 function calc() {
+  Fields.clearAll();
   let credits = 0,
     points = 0;
   try {
-    data.forEach(row => {
-      const c = courseCredits(row.credits);
-      if (!Object.hasOwn(ADU.grades, row.grade)) throw Error('Choose a valid ADU letter grade.');
+    data.forEach((row, i) => {
+      let c;
+      try {
+        c = courseCredits(row.credits);
+      } catch (error) {
+        error.field = `[data-i="${i}"][data-field="credits"]`;
+        throw error;
+      }
+      if (!Object.hasOwn(ADU.grades, row.grade)) Fields.fail(`[data-i="${i}"][data-field="grade"]`, 'Choose a valid ADU letter grade.');
       credits += c;
       points += ADU.grades[row.grade] * c;
     });
@@ -54,7 +60,7 @@ function calc() {
     $('#credits').textContent = 'Check your course inputs';
     $('#semester-gpa').textContent = '—';
     $('#semester-credits').textContent = 'Check your course inputs';
-    notice(error.message, true);
+    notice(error, true);
     return;
   }
   try {
@@ -66,7 +72,7 @@ function calc() {
   } catch (error) {
     $('#result').textContent = '—';
     $('#credits').textContent = 'Enter current GPA and completed credits';
-    notice(error.message, true);
+    notice(error, true);
   }
 }
 

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="#0b233f" name="theme-color"/>
+    <title>
+      GPA Retake Calculator | ADU Tour Guide
+    </title>
+    <meta content="See how retaking up to five courses could change your cumulative GPA using ADU’s grading scale." name="description"/>
+    <link href="../images/logo.png" rel="icon" type="image/png"/>
+    <link href="../shared.css" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet"/>
+    <script defer="" src="../shared.js">
+    </script>
+    <script defer="" src="../storage.js">
+    </script>
+    <script defer="" src="script.js">
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Skip to content
+    </a>
+    <nav aria-label="Main navigation" class="navbar">
+      <a class="site-brand" href="../index.html">
+        <img alt="" height="30" src="../images/logo.png" width="54"/>
+        ADU TourGuide
+      </a>
+      <button aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation" class="hamburger">
+        ☰
+      </button>
+      <ul id="navLinks">
+        <li>
+          <a href="../index.html">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="../gpa-calculator/index.html">
+            GPA Calculator
+          </a>
+        </li>
+        <li>
+          <a href="../schedule-generator/index.html">
+            Schedule Generator
+          </a>
+        </li>
+        <li>
+          <a href="../study-planner/index.html">
+            Degree Planner
+          </a>
+        </li>
+        <li>
+          <a href="../gpa-plan/index.html">
+            GPA Planner
+          </a>
+        </li>
+        <li>
+          <a aria-current="page" href="../gpa-retake/index.html">
+            GPA Retake Calculator
+          </a>
+        </li>
+        <li>
+          <a href="../project-split/index.html">
+            Project Work Split
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <main id="main">
+      <h1>
+        GPA Retake Calculator
+      </h1>
+      <p class="lead">
+        See how your GPA could change when you retake a course.
+      </p>
+      <section class="panel">
+        <div class="fields">
+          <label>
+            Current cumulative GPA
+            <input id="current" max="4" min="0" placeholder="e.g. 3.20" step="any" type="number"/>
+          </label>
+          <label>
+            Completed GPA credit hours
+            <input id="completed" min="0.5" placeholder="e.g. 60" step="any" type="number"/>
+          </label>
+          <label>
+            Number of courses to retake
+            <input id="count" max="5" min="1" placeholder="e.g. 1" step="1" type="number"/>
+          </label>
+        </div>
+        <p class="muted">
+          Enter courses already included in your current GPA and completed credits. This estimate replaces each original grade with the new grade; total credits stay the same. It includes lower new grades too. Check which retake policy applies to your transcript.
+        </p>
+        <div class="retake-courses" id="courses">
+        </div>
+        <button id="calculate" type="button">
+          Calculate possible GPAs
+        </button>
+      </section>
+      <p aria-live="polite" class="status" id="status" role="status">
+      </p>
+      <div aria-live="polite" id="results">
+      </div>
+    </main>
+    <footer>
+      ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. · Not affiliated with Abu Dhabi University · A student project.
+    </footer>
+  </body>
+</html>

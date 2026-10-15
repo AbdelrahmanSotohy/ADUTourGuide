@@ -1,156 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <title>
-   Degree Planner | ADU Tour Guide
-  </title>
-  <meta content="Plan your whole degree year by year and semester by semester. Track credits per semester and your running total toward graduation." name="description"/>
-  <link href="../shared.css" rel="stylesheet"/>
-  <link href="style.css" rel="stylesheet"/>
-  <script defer="" src="../shared.js">
-  </script>
-  <script defer="" src="script.js">
-  </script>
-  <link href="../images/logo.png" rel="icon" type="image/png"/>
- </head>
- <body>
-  <a class="skip" href="#main">
-   Skip to content
-  </a>
-  <nav aria-label="Main navigation" class="navbar">
-   <a class="site-brand" href="../index.html">
-    <img alt="" height="30" src="../images/logo.png" width="54"/>
-    ADU TourGuide
-   </a>
-   <button aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation" class="hamburger">
-    ☰
-   </button>
-   <ul id="navLinks">
-    <li>
-     <a href="../index.html">
-      Home
-     </a>
-    </li>
-    <li>
-     <a href="../gpa-calculator/index.html">
-      GPA Calculator
-     </a>
-    </li>
-    <li>
-     <a href="../schedule-generator/index.html">
-      Schedule Generator
-     </a>
-    </li>
-    <li>
-     <a aria-current="page" href="../study-planner/index.html">
-      Degree Planner
-     </a>
-    </li>
-    <li>
-     <a href="../gpa-plan/index.html">
-      GPA Planner
-     </a>
-    </li>
-    <li>
-     <a href="../grade-plan/index.html">
-      Grade Planner
-     </a>
-    </li>
-    <li>
-     <a href="../project-split/index.html">
-      Project Work Split
-     </a>
-    </li>
-   </ul>
-  </nav>
-  <main id="main">
-   <h1>
-    Degree Planner
-   </h1>
-   <p class="lead">
-    Your degree plan, semester by semester. Enter your courses and see your credits add up.
-   </p>
-   <section class="panel planner-summary">
-    <label for="required">
-     Credits required for my degree
-     <input id="required" inputmode="decimal" type="text" value="140"/>
-     <span class="print-cell" id="required-print">
-      140
-     </span>
-    </label>
-    <div aria-live="polite" class="summary-stats">
-     <div class="metric">
-      <span>
-       Total credits planned
-      </span>
-      <div class="result" id="planned">
-       0
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width,initial-scale=1" name="viewport"/>
+    <title>
+      Degree Planner | ADU Tour Guide
+    </title>
+    <meta content="Plan your whole degree year by year and semester by semester. Track credits per semester and your running total toward graduation." name="description"/>
+    <link href="../shared.css" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet"/>
+    <script defer="" src="../shared.js">
+    </script>
+    <script defer="" src="script.js">
+    </script>
+    <link href="../images/logo.png" rel="icon" type="image/png"/>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Skip to content
+    </a>
+    <nav aria-label="Main navigation" class="navbar">
+      <a class="site-brand" href="../index.html">
+        <img alt="" height="30" src="../images/logo.png" width="54"/>
+        ADU TourGuide
+      </a>
+      <button aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation" class="hamburger">
+        ☰
+      </button>
+      <ul id="navLinks">
+        <li>
+          <a href="../index.html">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="../gpa-calculator/index.html">
+            GPA Calculator
+          </a>
+        </li>
+        <li>
+          <a href="../schedule-generator/index.html">
+            Schedule Generator
+          </a>
+        </li>
+        <li>
+          <a aria-current="page" href="../study-planner/index.html">
+            Degree Planner
+          </a>
+        </li>
+        <li>
+          <a href="../gpa-plan/index.html">
+            GPA Planner
+          </a>
+        </li>
+        <li>
+          <a href="../gpa-retake/index.html">
+            GPA Retake Calculator
+          </a>
+        </li>
+        <li>
+          <a href="../project-split/index.html">
+            Project Work Split
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <main id="main">
+      <h1>
+        Degree Planner
+      </h1>
+      <p class="lead">
+        Your degree plan, semester by semester. Enter your courses and see your credits add up.
+      </p>
+      <section class="panel planner-summary">
+        <label for="required">
+          Credits required for my degree
+          <input id="required" inputmode="decimal" type="text" value="140"/>
+          <span class="print-cell" id="required-print">
+            140
+          </span>
+        </label>
+        <div aria-live="polite" class="summary-stats">
+          <div class="metric">
+            <span>
+              Total credits planned
+            </span>
+            <div class="result" id="planned">
+              0
+            </div>
+          </div>
+          <div class="metric">
+            <span id="balance-label">
+              Credits remaining
+            </span>
+            <div class="result" id="balance">
+              140
+            </div>
+          </div>
+        </div>
+        <label for="degree-progress">
+          Planned credits toward your goal
+        </label>
+        <progress id="degree-progress" max="100" value="0">
+        </progress>
+        <p class="muted" id="progress-text">
+        </p>
+        <div class="toolbar">
+          <button class="secondary" id="export">
+            Export CSV
+          </button>
+          <button class="secondary" id="import">
+            Import CSV
+          </button>
+          <button class="secondary" id="print">
+            Print
+          </button>
+          <button class="danger" id="clear">
+            Clear all
+          </button>
+        </div>
+        <input accept=".csv,text/csv" hidden="" id="csv-file" type="file"/>
+        <p aria-live="polite" class="status" id="status" role="status">
+        </p>
+      </section>
+      <div id="years">
       </div>
-     </div>
-     <div class="metric">
-      <span id="balance-label">
-       Credits remaining
-      </span>
-      <div class="result" id="balance">
-       140
+      <div class="add-year">
+        <button id="add-year">
+          + Add year
+        </button>
       </div>
-     </div>
+    </main>
+    <!-- On-page confirmations also work in embedded Site previews. -->
+    <div class="confirmation-backdrop" hidden="" id="confirmation">
+      <section aria-describedby="confirmation-text" aria-labelledby="confirmation-title" aria-modal="true" class="confirmation-card" role="alertdialog">
+        <h2 id="confirmation-title">
+          Confirm action
+        </h2>
+        <p id="confirmation-text">
+        </p>
+        <div class="toolbar">
+          <button class="secondary" id="confirm-cancel">
+            Cancel
+          </button>
+          <button id="confirm-yes">
+            Confirm
+          </button>
+        </div>
+      </section>
     </div>
-    <label for="degree-progress">
-     Planned credits toward your goal
-    </label>
-    <progress id="degree-progress" max="100" value="0">
-    </progress>
-    <p class="muted" id="progress-text">
-    </p>
-    <div class="toolbar">
-     <button class="secondary" id="export">
-      Export CSV
-     </button>
-     <button class="secondary" id="import">
-      Import CSV
-     </button>
-     <button class="secondary" id="print">
-      Print
-     </button>
-     <button class="danger" id="clear">
-      Clear all
-     </button>
-    </div>
-    <input accept=".csv,text/csv" hidden="" id="csv-file" type="file"/>
-    <p aria-live="polite" class="status" id="status" role="status">
-    </p>
-   </section>
-   <div id="years">
-   </div>
-   <div class="add-year">
-    <button id="add-year">
-     + Add year
-    </button>
-   </div>
-  </main>
-  <!-- On-page confirmations also work in embedded Site previews. -->
-  <div class="confirmation-backdrop" hidden="" id="confirmation">
-   <section aria-describedby="confirmation-text" aria-labelledby="confirmation-title" aria-modal="true" class="confirmation-card" role="alertdialog">
-    <h2 id="confirmation-title">
-     Confirm action
-    </h2>
-    <p id="confirmation-text">
-    </p>
-    <div class="toolbar">
-     <button class="secondary" id="confirm-cancel">
-      Cancel
-     </button>
-     <button id="confirm-yes">
-      Confirm
-     </button>
-    </div>
-   </section>
-  </div>
-  <footer>
-   ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. Export a CSV to back it up · Not affiliated with Abu Dhabi University · A student project.
-  </footer>
- </body>
+    <footer>
+      ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. Export a CSV to back it up · Not affiliated with Abu Dhabi University · A student project.
+    </footer>
+  </body>
 </html>

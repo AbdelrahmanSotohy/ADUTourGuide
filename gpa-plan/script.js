@@ -1,18 +1,18 @@
 let data = Storage.load('gpa-plan', {
-  current: 3,
-  completed: 60,
-  count: 4,
+  current: '',
+  completed: '',
+  count: '',
   goal: 'target',
-  target: 3.2,
-  credits: [3, 3, 3, 3]
+  target: '',
+  credits: []
 });
 const save = Storage.debounce('gpa-plan', () => data);
 let run = 0;
 
 function render() {
   ['current', 'completed', 'count', 'goal', 'target'].forEach(k => $('#' + k).value = data[k]);
-  $('#target-label').hidden = data.goal !== 'target';
-  $('#courses').innerHTML = data.credits.map((c, i) => `<label>Course ${i+1} credits<input type="number" min="0.5" step="0.5" data-credit="${i}" value="${ADU.escape(c)}"></label>`).join('')
+  $('#target-label').hidden = false;
+  $('#courses').innerHTML = data.credits.map((c, i) => `<label>Course ${i+1} credits<input type="number" min="0.5" step="0.5" placeholder="e.g. 3" data-credit="${i}" value="${ADU.escape(c)}"></label>`).join('')
 }
 
 function invalidate() {
@@ -25,14 +25,16 @@ $$('input,select').filter(el => el.id).forEach(el => el.oninput = () => {
   invalidate();
   if (el.id === 'count') {
     const n = Number(el.value);
+    if (n > 8) Fields.show('#count', 'You can plan up to 8 courses at a time.');
+    else notice('');
     if (Number.isInteger(n) && n >= 1 && n <= 8) {
       data.credits = Array.from({
         length: n
-      }, (_, i) => data.credits[i] ?? 3);
-      $('#courses').innerHTML = data.credits.map((c, i) => `<label>Course ${i+1} credits<input type="number" min="0.5" step="0.5" data-credit="${i}" value="${ADU.escape(c)}"></label>`).join('')
+      }, (_, i) => data.credits[i] ?? '');
+      $('#courses').innerHTML = data.credits.map((c, i) => `<label>Course ${i+1} credits<input type="number" min="0.5" step="0.5" placeholder="e.g. 3" data-credit="${i}" value="${ADU.escape(c)}"></label>`).join('')
     }
   }
-  $('#target-label').hidden = data.goal !== 'target';
+  $('#target-label').hidden = false;
   save()
 });
 $('#courses').oninput = e => {
@@ -44,15 +46,17 @@ $('#courses').oninput = e => {
 };
 
 function valid(d) {
-  ADU.number(d.current, 0, 4);
-  ADU.number(d.completed, 0);
-  ADU.number(d.target, 0, 4);
-  const n = ADU.number(d.count, 1, 8);
-  if (!Number.isInteger(n) || d.credits.length !== n || !['target', 'same', 'increase'].includes(d.goal)) throw Error('Choose 1–8 courses and a valid goal.');
-  d.credits.forEach(c => ADU.number(c, 0.5))
+  Fields.number(d.current, 0, 4, '#current');
+  Fields.number(d.completed, 0, Infinity, '#completed');
+  if (d.goal === 'target' || String(d.target).trim() !== '') Fields.number(d.target, 0, 4, '#target');
+  if (Number(d.count) > 8) Fields.fail('#count', 'You can plan up to 8 courses at a time.');
+  const n = Fields.number(d.count, 1, 8, '#count');
+  if (!Number.isInteger(n) || d.credits.length !== n || !['target', 'same', 'increase'].includes(d.goal)) Fields.fail('#count', 'Enter a whole number from 1 to 8.');
+  d.credits.forEach((c, i) => Fields.number(c, 0.5, Infinity, `[data-credit="${i}"]`))
 }
 $('#calculate').onclick = () => {
   try {
+    Fields.clearAll();
     valid(data);
     const myRun = ++run,
       // Equal-credit courses are adjacent, so only one ordering is explored.
@@ -62,6 +66,8 @@ $('#calculate').onclick = () => {
       goal = data.goal === 'target' ? Number(data.target) : Number(data.current),
       strict = data.goal === 'increase',
       required = goal * denom - base;
+    const targetGpa = String(data.target).trim() === '' ? null : Number(data.target);
+    const meetsTarget = gpa => targetGpa !== null && gpa >= targetGpa - 1e-9;
     const grades = Object.entries(ADU.grades);
     const creditGroups = [...new Set(credits)];
 
@@ -119,13 +125,14 @@ $('#calculate').onclick = () => {
         setTimeout(chunk, 0);
         return
       }
+      found.sort((a, b) => b.gpa - a.gpa);
       $('#calculate').disabled = false;
-      $('#results').innerHTML = `<section class="panel"><h2>${found.length?'Grade combinations':'No qualifying combinations'}</h2><p>Required semester GPA: ${(required/credits.reduce((a,b)=>a+b,0)).toFixed(3)}${strict?' (must exceed)':' (minimum)'}. Maximum cumulative GPA: ${((base+suffix[0])/denom).toFixed(3)}.</p><p>${truncated?'Showing up to 200 combinations; search is limited to 500,000 states. These are examples, not an exhaustive list.':'All unique qualifying combinations are shown.'}</p><div class="table-wrap"><table><thead><tr>${creditGroups.map(c=>`<th>${c}-credit courses</th>`).join('')}<th>Cumulative GPA</th></tr></thead><tbody>${found.map(s=>`<tr>${creditGroups.map(c=>`<td>${gradeCounts(s.combo, c)}</td>`).join('')}<td>${s.gpa.toFixed(3)}</td></tr>`).join('')}</tbody></table></div></section>`
+      $('#results').innerHTML = `<section class="panel"><h2>${found.length?'Grade combinations':'No qualifying combinations'}</h2><p>Required semester GPA: ${(required/credits.reduce((a,b)=>a+b,0)).toFixed(3)}${strict?' (must exceed)':' (minimum)'}. Maximum cumulative GPA: ${((base+suffix[0])/denom).toFixed(3)}.</p><p>${truncated?'Showing up to 200 combinations; search is limited to 500,000 states. These are examples, not an exhaustive list.':'All unique qualifying combinations are shown.'}</p>${targetGpa !== null ? `<p class="target-key">Highlighted rows meet or exceed your target GPA of ${targetGpa.toFixed(3)}.</p>` : ''}<div class="table-wrap"><table><thead><tr>${creditGroups.map(c=>`<th>${c}-credit courses</th>`).join('')}<th aria-sort="descending">Cumulative GPA ↓</th></tr></thead><tbody>${found.map(s=>`<tr class="${meetsTarget(s.gpa) ? 'target-met' : ''}">${creditGroups.map(c=>`<td>${gradeCounts(s.combo, c)}</td>`).join('')}<td>${s.gpa.toFixed(3)}${meetsTarget(s.gpa) ? ' <span class="target-badge">Target met</span>' : ''}</td></tr>`).join('')}</tbody></table></div></section>`
     }
     chunk();
     notice('')
   } catch (e) {
-    notice(e.message, true)
+    notice(e, true)
   }
 };
 render();

@@ -1,131 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <meta content="#0b233f" name="theme-color"/>
-  <title>
-   GPA Planner | ADU Tour Guide
-  </title>
-  <meta content="Set a target GPA and see which grade combinations this semester will get you there. Works with your credit hours and current GPA." name="description"/>
-  <link href="../shared.css" rel="stylesheet"/>
-  <link href="style.css" rel="stylesheet"/>
-  <script defer="" src="../shared.js">
-  </script>
-  <script defer="" src="../storage.js">
-  </script>
-  <script defer="" src="script.js">
-  </script>
-  <link href="../images/logo.png" rel="icon" type="image/png"/>
- </head>
- <body>
-  <a class="skip" href="#main">
-   Skip to content
-  </a>
-  <nav aria-label="Main navigation" class="navbar">
-   <a class="site-brand" href="../index.html">
-    <img alt="" height="30" src="../images/logo.png" width="54"/>
-    ADU TourGuide
-   </a>
-   <button aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation" class="hamburger">
-    ☰
-   </button>
-   <ul id="navLinks">
-    <li>
-     <a href="../index.html">
-      Home
-     </a>
-    </li>
-    <li>
-     <a href="../gpa-calculator/index.html">
-      GPA Calculator
-     </a>
-    </li>
-    <li>
-     <a href="../schedule-generator/index.html">
-      Schedule Generator
-     </a>
-    </li>
-    <li>
-     <a href="../study-planner/index.html">
-      Degree Planner
-     </a>
-    </li>
-    <li>
-     <a aria-current="page" href="../gpa-plan/index.html">
-      GPA Planner
-     </a>
-    </li>
-    <li>
-     <a href="../grade-plan/index.html">
-      Grade Planner
-     </a>
-    </li>
-    <li>
-     <a href="../project-split/index.html">
-      Project Work Split
-     </a>
-    </li>
-   </ul>
-  </nav>
-  <main id="main">
-   <h1>
-    GPA Planner
-   </h1>
-   <p class="lead">
-    Explore the grades you need this semester to reach your cumulative GPA goal.
-   </p>
-   <section class="panel">
-    <div class="fields">
-     <label>
-      Current cumulative GPA
-      <input id="current" max="4" min="0" step="0.01" type="number"/>
-     </label>
-     <label>
-      Completed GPA credit hours
-      <input id="completed" min="0" step="0.5" type="number"/>
-     </label>
-     <label>
-      Courses this semester (1–8)
-      <input id="count" max="8" min="1" step="1" type="number"/>
-     </label>
-     <label>
-      Goal
-      <select id="goal">
-       <option value="target">
-        Specific target
-       </option>
-       <option value="same">
-        Keep same or better
-       </option>
-       <option value="increase">
-        Increase GPA
-       </option>
-      </select>
-     </label>
-     <label id="target-label">
-      Target cumulative GPA
-      <input id="target" max="4" min="0" step="0.01" type="number"/>
-     </label>
-    </div>
-    <div class="fields" id="courses">
-    </div>
-    <div class="toolbar">
-     <button id="calculate">
-      Find grade combinations
-     </button>
-    </div>
-    <p class="muted">
-     Course positions identify distinct courses. Keep same accepts the current GPA or better; increase means strictly above the unrounded current GPA. Plans use completed credits plus this semester’s credits.
-    </p>
-   </section>
-   <div id="results">
-   </div>
-   <div aria-live="polite" class="status" id="status" role="status">
-   </div>
-  </main>
-  <footer>
-   ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. · Not affiliated with Abu Dhabi University · A student project.
-  </footer>
- </body>
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width,initial-scale=1" name="viewport"/>
+    <meta content="#0b233f" name="theme-color"/>
+    <title>
+      GPA Planner | ADU Tour Guide
+    </title>
+    <meta content="Set a target GPA and see which grade combinations this semester will get you there. Works with your credit hours and current GPA." name="description"/>
+    <link href="../shared.css" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet"/>
+    <script defer="" src="../shared.js">
+    </script>
+    <script defer="" src="../storage.js">
+    </script>
+    <script defer="" src="script.js">
+    </script>
+    <link href="../images/logo.png" rel="icon" type="image/png"/>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Skip to content
+    </a>
+    <nav aria-label="Main navigation" class="navbar">
+      <a class="site-brand" href="../index.html">
+        <img alt="" height="30" src="../images/logo.png" width="54"/>
+        ADU TourGuide
+      </a>
+      <button aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation" class="hamburger">
+        ☰
+      </button>
+      <ul id="navLinks">
+        <li>
+          <a href="../index.html">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="../gpa-calculator/index.html">
+            GPA Calculator
+          </a>
+        </li>
+        <li>
+          <a href="../schedule-generator/index.html">
+            Schedule Generator
+          </a>
+        </li>
+        <li>
+          <a href="../study-planner/index.html">
+            Degree Planner
+          </a>
+        </li>
+        <li>
+          <a aria-current="page" href="../gpa-plan/index.html">
+            GPA Planner
+          </a>
+        </li>
+        <li>
+          <a href="../gpa-retake/index.html">
+            GPA Retake Calculator
+          </a>
+        </li>
+        <li>
+          <a href="../project-split/index.html">
+            Project Work Split
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <main id="main">
+      <h1>
+        GPA Planner
+      </h1>
+      <p class="lead">
+        Explore the grades you need this semester to reach your cumulative GPA goal.
+      </p>
+      <section class="panel">
+        <div class="fields">
+          <label>
+            Current cumulative GPA
+            <input id="current" max="4" min="0" placeholder="e.g. 3.20" step="0.01" type="number"/>
+          </label>
+          <label>
+            Completed GPA credit hours
+            <input id="completed" min="0" placeholder="e.g. 60" step="0.5" type="number"/>
+          </label>
+          <label>
+            Number of courses you’re taking
+            <input id="count" max="8" min="1" placeholder="e.g. 4" step="1" type="number"/>
+          </label>
+          <label>
+            Goal
+            <select id="goal">
+              <option value="target">
+                Specific target
+              </option>
+              <option value="same">
+                Keep same or better
+              </option>
+              <option value="increase">
+                Increase GPA
+              </option>
+            </select>
+          </label>
+          <label id="target-label">
+            Target cumulative GPA
+            <input id="target" max="4" min="0" placeholder="e.g. 3.50" step="0.01" type="number"/>
+          </label>
+        </div>
+        <div class="fields" id="courses">
+        </div>
+        <div class="toolbar">
+          <button id="calculate">
+            Find grade combinations
+          </button>
+        </div>
+        <p class="muted">
+          Keep same accepts your current GPA or better; increase means strictly above it. Enter a target GPA to highlight combinations that meet or exceed it. Plans include completed credits plus this semester’s credits.
+        </p>
+      </section>
+      <div id="results">
+      </div>
+      <div aria-live="polite" class="status" id="status" role="status">
+      </div>
+    </main>
+    <footer>
+      ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. · Not affiliated with Abu Dhabi University · A student project.
+    </footer>
+  </body>
 </html>

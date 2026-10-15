@@ -1,0 +1,36 @@
+/* Course cards and result summaries use the shared dashboard styles. */
+.retake-course {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #dce5ee;
+  border-radius: 12px;
+  background: #f7fbfd;
+}
+
+.retake-course h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.retake-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.retake-summary .metric {
+  margin: 0;
+}
+
+.retake-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.retake-improved {
+  color: #08749e;
+  font-weight: 700;
+}

@@ -1,2 +1,27 @@
 /* Page-specific layout;
    shared components live in ../shared.css. */
+
+/* Target matches stay readable and include a text badge, not just color. */
+.target-met td {
+  background: #e7f6fc;
+}
+
+.target-met td:first-child {
+  border-left: 3px solid #0ca2dd;
+}
+
+.target-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: #0b233f;
+  color: #fff;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.target-key {
+  color: #0b233f;
+  font-size: 13px;
+}

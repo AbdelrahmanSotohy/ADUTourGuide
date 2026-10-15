@@ -40,3 +40,16 @@
 #members .card>.pill {
   align-self: flex-start;
 }
+
+/* Keep each add button beside the section it belongs to. */
+.setup-heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0 16px;
+}
+
+.setup-heading h2 {
+  margin: 0;
+}

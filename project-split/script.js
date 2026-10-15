@@ -33,7 +33,7 @@ function stats() {
 }
 
 function render() {
-  $('#setup').innerHTML = `<h2>Members</h2>${data.members.map((m,i)=>`<div class="fields"><label>Member ${i+1}<input data-name="member" data-i="${i}" value="${ADU.escape(m)}"></label><button class="danger" data-remove="member" data-i="${i}">Remove member</button></div>`).join('')}<h2>Shared phases</h2>${data.phases.map((p,i)=>`<div class="fields"><label>Phase ${i+1}<input data-name="phase" data-i="${i}" value="${ADU.escape(p)}"></label><button class="danger" data-remove="phase" data-i="${i}">Remove phase</button></div>`).join('')}`;
+  $('#setup').innerHTML = `<div class="setup-heading"><h2>Members</h2><button id="member">+ Add member</button></div>${data.members.map((m,i)=>`<div class="fields"><label>Member ${i+1}<input data-name="member" data-i="${i}" value="${ADU.escape(m)}"></label><button class="danger" data-remove="member" data-i="${i}">Remove member</button></div>`).join('')}<div class="setup-heading"><h2>Shared phases</h2><button id="phase">+ Add phase</button></div>${data.phases.map((p,i)=>`<div class="fields"><label>Phase ${i+1}<input data-name="phase" data-i="${i}" value="${ADU.escape(p)}"></label><button class="danger" data-remove="phase" data-i="${i}">Remove phase</button></div>`).join('')}`;
   $('#member').disabled = data.members.length >= 8;
   $('#members').innerHTML = data.members.map((m, i) => `<article class="card"><h2 data-member-title="${i}">${ADU.escape(m)}</h2><div class="pill" data-progress="${i}"></div>${data.phases.map((p,j)=>{let t=task(i,j);return `<section class="task"><h3 data-phase-title="${j}">${ADU.escape(p)}</h3><label>Task<textarea data-m="${i}" data-p="${j}" data-field="task">${ADU.escape(t.task)}</textarea></label><label><input type="checkbox" data-m="${i}" data-p="${j}" data-field="done" ${t.done?'checked':''}> Completed</label><label>Due date<input type="date" data-m="${i}" data-p="${j}" data-field="due" value="${ADU.escape(t.due)}"></label><label>Notes<textarea data-m="${i}" data-p="${j}" data-field="notes">${ADU.escape(t.notes)}</textarea></label></section>`}).join('')}</article>`).join('');
   stats()
@@ -49,7 +49,10 @@ $('#setup').oninput = e => {
   }
 };
 $('#setup').onclick = e => {
-  const t = e.target;
+  const t = e.target.closest('button');
+  if (!t) return;
+  if (t.id === 'member') return addMember();
+  if (t.id === 'phase') return addPhase();
   if (!t.dataset.remove) return;
   const member = t.dataset.remove === 'member',
     index = Number(t.dataset.i);
@@ -77,7 +80,8 @@ $('#members').oninput = e => {
     save()
   }
 };
-$('#member').onclick = () => {
+
+function addMember() {
   if (data.members.length < 8) {
     let name = 'Member ' + (data.members.length + 1);
     while (data.members.includes(name)) name += ' new';
@@ -86,7 +90,8 @@ $('#member').onclick = () => {
     save()
   }
 };
-$('#phase').onclick = () => {
+
+function addPhase() {
   let name = 'Phase ' + (data.phases.length + 1);
   while (data.phases.includes(name)) name += ' new';
   data.phases.push(name);
@@ -96,7 +101,16 @@ $('#phase').onclick = () => {
 const headers = ['Phase', 'Task', 'Assigned To', 'Status', 'Due Date', 'Notes'];
 
 function uniqueNames() {
-  if ([...data.members, ...data.phases].some(n => !n.trim()) || new Set(data.members).size !== data.members.length || new Set(data.phases).size !== data.phases.length) throw Error('Use nonempty, unique member names and phase names before exporting.')
+  Fields.clearAll();
+  for (const [type, list] of [
+      ['member', data.members],
+      ['phase', data.phases]
+    ]) {
+    list.forEach((name, i) => {
+      if (!name.trim()) Fields.fail(`[data-name="${type}"][data-i="${i}"]`, 'Enter a name before exporting.');
+      if (list.slice(0, i).includes(name)) Fields.fail(`[data-name="${type}"][data-i="${i}"]`, 'Use a unique name before exporting.');
+    });
+  }
 }
 $('#export').onclick = () => {
   try {
@@ -108,7 +122,7 @@ $('#export').onclick = () => {
     }));
     CSV.export('project-split', headers, rows)
   } catch (e) {
-    notice(e.message, true)
+    notice(e, true)
   }
 };
 $('#import').onclick = () => CSV.import(headers, rows => {

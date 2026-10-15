@@ -109,7 +109,7 @@ document.addEventListener('keydown', e => {
 });
 
 function rowMarkup(row, y, t, r) {
-  return `<tr><td>${r + 1}<button class="delete-row" data-delete="${y},${t},${r}" aria-label="Delete row ${r + 1} from Year ${y + 1} ${TERMS[t]}">×</button></td>${['code', 'notes', 'credits'].map(key => `<td><input data-y="${y}" data-t="${t}" data-r="${r}" data-key="${key}" ${key === 'credits' ? 'inputmode="decimal"' : ''} aria-label="${key} Year ${y + 1} ${TERMS[t]} row ${r + 1}" value="${escapeText(row[key])}"><span class="print-cell">${escapeText(row[key])}</span></td>`).join('')}</tr>`;
+  return `<tr><td>${r + 1}<button class="delete-row" data-delete="${y},${t},${r}" aria-label="Delete row ${r + 1} from Year ${y + 1} ${TERMS[t]}">×</button></td>${['code', 'notes', 'credits'].map(key => `<td><input data-y="${y}" data-t="${t}" data-r="${r}" data-key="${key}" ${key === 'credits' ? 'inputmode="decimal"' : ''} aria-label="${key === 'notes' ? 'Course name or notes' : key} Year ${y + 1} ${TERMS[t]} row ${r + 1}" value="${escapeText(row[key])}"><span class="print-cell">${escapeText(row[key])}</span></td>`).join('')}</tr>`;
 }
 // Keep optional terms in the data; show saved entries even in older plans.
 function termVisible(y, t) {
@@ -119,7 +119,7 @@ function termVisible(y, t) {
 
 function semesterMarkup(rows, y, t) {
   return `<section class="semester" ${termVisible(y, t) ? '' : 'hidden'}><h3>${TERMS[t]}</h3><div class="table-wrap"><table>
-    <thead><tr><th scope="col">No.</th><th scope="col">Course Code</th><th scope="col">Notes</th><th scope="col">Credits</th></tr></thead>
+    <thead><tr><th scope="col">No.</th><th scope="col">Course Code</th><th scope="col">Course Name/ Notes</th><th scope="col">Credits</th></tr></thead>
     <tbody>${rows.map((row, r) => rowMarkup(row, y, t, r)).join('')}</tbody>
     <tfoot><tr><td colspan="3">Total Credits for ${TERMS[t]}</td><td id="total-${y}-${t}">0</td></tr><tr class="cumulative"><td colspan="3">Cumulative Credits</td><td id="cumulative-${y}-${t}">0</td></tr></tfoot>
   </table></div><button class="secondary" data-add="${y},${t}">+ Add row</button></section>`;
@@ -159,6 +159,7 @@ function totals() {
   get('#required-print').textContent = plan.required;
 }
 get('#required').oninput = e => {
+  if (e.target.value.trim() && (!Number.isFinite(Number(e.target.value)) || Number(e.target.value) < 0)) Fields.show(e.target, 'Enter a nonnegative number of required credits.');
   plan.required = e.target.value;
   totals();
   saveSoon();
@@ -166,8 +167,9 @@ get('#required').oninput = e => {
 get('#years').oninput = e => {
   const input = e.target;
   if (!input.dataset.key) return;
+  if (input.dataset.key === 'credits' && input.value.trim() && (!Number.isFinite(Number(input.value)) || Number(input.value) < 0)) Fields.show(input, 'Enter a nonnegative number of credit hours.');
   plan.years[input.dataset.y][input.dataset.t][input.dataset.r][input.dataset.key] = input.value;
-  input.nextElementSibling.textContent = input.value; // Wrapping text for printing.
+  input.parentElement.querySelector('.print-cell').textContent = input.value; // Wrapping text for printing.
   totals();
   saveSoon();
 };

@@ -677,3 +677,17 @@ footer {
   border-radius: 4px;
   flex-shrink: 0;
 }
+
+/* Errors are placed directly beneath the related input. */
+.field-error {
+  display: block;
+  margin: 6px 0 0;
+  color: #e7212b;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+[aria-invalid="true"] {
+  border-color: #e7212b !important;
+}

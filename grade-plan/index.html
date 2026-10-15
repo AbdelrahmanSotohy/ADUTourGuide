@@ -1,139 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <meta content="#0b233f" name="theme-color"/>
-  <title>
-   Grade Planner | ADU Tour Guide
-  </title>
-  <meta content="Enter your scores so far in a course and see what you need on the remaining work to reach each grade, from D to A." name="description"/>
-  <link href="../shared.css" rel="stylesheet"/>
-  <link href="style.css" rel="stylesheet"/>
-  <script defer="" src="../shared.js">
-  </script>
-  <script defer="" src="../storage.js">
-  </script>
-  <script defer="" src="../table.js">
-  </script>
-  <script defer="" src="script.js">
-  </script>
-  <link href="../images/logo.png" rel="icon" type="image/png"/>
- </head>
- <body>
-  <a class="skip" href="#main">
-   Skip to content
-  </a>
-  <nav aria-label="Main navigation" class="navbar">
-   <a class="site-brand" href="../index.html">
-    <img alt="" height="30" src="../images/logo.png" width="54"/>
-    ADU TourGuide
-   </a>
-   <button aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation" class="hamburger">
-    ☰
-   </button>
-   <ul id="navLinks">
-    <li>
-     <a href="../index.html">
-      Home
-     </a>
-    </li>
-    <li>
-     <a href="../gpa-calculator/index.html">
-      GPA Calculator
-     </a>
-    </li>
-    <li>
-     <a href="../schedule-generator/index.html">
-      Schedule Generator
-     </a>
-    </li>
-    <li>
-     <a href="../study-planner/index.html">
-      Degree Planner
-     </a>
-    </li>
-    <li>
-     <a href="../gpa-plan/index.html">
-      GPA Planner
-     </a>
-    </li>
-    <li>
-     <a aria-current="page" href="../grade-plan/index.html">
-      Grade Planner
-     </a>
-    </li>
-    <li>
-     <a href="../project-split/index.html">
-      Project Work Split
-     </a>
-    </li>
-   </ul>
-  </nav>
-  <main id="main">
-   <h1>
-    Grade Planner
-   </h1>
-   <p class="lead">
-    See what you need on your remaining work to reach each grade tier.
-   </p>
-   <section class="panel">
-    <div class="fields">
-     <label>
-      Course name
-      <input id="course" placeholder="e.g. Data Structures and Algorithms"/>
-     </label>
-     <label>
-      Remaining course weight (%)
-      <input id="remaining" max="100" min="0" step="any" type="number"/>
-     </label>
-    </div>
-    <p class="muted">
-     For each completed assessment, enter earned points, possible points, and its percentage weight in the final course grade. Completed weights plus remaining weight must total 100%. Results use exact percentage thresholds without assuming rounding.
-    </p>
-    <div class="toolbar">
-     <button id="add">
-      + Add row
-     </button>
-    </div>
-    <div class="table-wrap">
-     <table>
-      <thead>
-       <tr>
-        <th>
-         Assessment
-        </th>
-        <th>
-         Earned points
-        </th>
-        <th>
-         Possible points
-        </th>
-        <th>
-         Weight (%)
-        </th>
-        <th>
-         Action
-        </th>
-       </tr>
-      </thead>
-      <tbody id="rows">
-      </tbody>
-     </table>
-    </div>
-   </section>
-   <section class="panel">
-    <h2>
-     Required on remaining work
-    </h2>
-    <div id="results">
-    </div>
-   </section>
-   <div aria-live="polite" class="status" id="status" role="status">
-   </div>
-  </main>
-  <footer>
-   ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. · Not affiliated with Abu Dhabi University · A student project.
-  </footer>
- </body>
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width,initial-scale=1" name="viewport"/>
+    <meta content="#0b233f" name="theme-color"/>
+    <title>
+      Grade Planner | ADU Tour Guide
+    </title>
+    <meta content="Enter your scores so far in a course and see what you need on the remaining work to reach each grade, from D to A." name="description"/>
+    <link href="../shared.css" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet"/>
+    <script defer="" src="../shared.js">
+    </script>
+    <script defer="" src="../storage.js">
+    </script>
+    <script defer="" src="../table.js">
+    </script>
+    <script defer="" src="script.js">
+    </script>
+    <link href="../images/logo.png" rel="icon" type="image/png"/>
+    <meta content="noindex, nofollow" name="robots"/>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Skip to content
+    </a>
+    <nav aria-label="Main navigation" class="navbar">
+      <a class="site-brand" href="../index.html">
+        <img alt="" height="30" src="../images/logo.png" width="54"/>
+        ADU TourGuide
+      </a>
+      <button aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation" class="hamburger">
+        ☰
+      </button>
+      <ul id="navLinks">
+        <li>
+          <a href="../index.html">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="../gpa-calculator/index.html">
+            GPA Calculator
+          </a>
+        </li>
+        <li>
+          <a href="../schedule-generator/index.html">
+            Schedule Generator
+          </a>
+        </li>
+        <li>
+          <a href="../study-planner/index.html">
+            Degree Planner
+          </a>
+        </li>
+        <li>
+          <a href="../gpa-plan/index.html">
+            GPA Planner
+          </a>
+        </li>
+        <li>
+          <a href="../gpa-retake/index.html">
+            GPA Retake Calculator
+          </a>
+        </li>
+        <li>
+          <a href="../project-split/index.html">
+            Project Work Split
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <main id="main">
+      <h1>
+        Grade Planner
+      </h1>
+      <p class="lead">
+        See what you need on your remaining work to reach each grade tier.
+      </p>
+      <section class="panel">
+        <div class="fields">
+          <label>
+            Course name
+            <input id="course" placeholder="e.g. Data Structures and Algorithms"/>
+          </label>
+          <label>
+            Remaining course weight (%)
+            <input id="remaining" max="100" min="0" step="any" type="number"/>
+          </label>
+        </div>
+        <p class="muted">
+          For each completed assessment, enter earned points, possible points, and its percentage weight in the final course grade. Completed weights plus remaining weight must total 100%. Results use exact percentage thresholds without assuming rounding.
+        </p>
+        <div class="toolbar">
+          <button id="add">
+            + Add row
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  Assessment
+                </th>
+                <th>
+                  Earned points
+                </th>
+                <th>
+                  Possible points
+                </th>
+                <th>
+                  Weight (%)
+                </th>
+                <th>
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody id="rows">
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>
+          Required on remaining work
+        </h2>
+        <div id="results">
+        </div>
+      </section>
+      <div aria-live="polite" class="status" id="status" role="status">
+      </div>
+    </main>
+    <footer>
+      ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. · Not affiliated with Abu Dhabi University · A student project.
+    </footer>
+  </body>
 </html>

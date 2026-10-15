@@ -1,261 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <meta content="#0b233f" name="theme-color"/>
-  <title>
-   GPA Calculator | ADU Tour Guide
-  </title>
-  <meta content="Calculate your GPA instantly using ADU's grading scale. Add your courses, grades and credit hours." name="description"/>
-  <link href="../shared.css" rel="stylesheet"/>
-  <link href="style.css" rel="stylesheet"/>
-  <script defer="" src="../shared.js">
-  </script>
-  <script defer="" src="../storage.js">
-  </script>
-  <script defer="" src="script.js">
-  </script>
-  <link href="../images/logo.png" rel="icon" type="image/png"/>
- </head>
- <body>
-  <a class="skip" href="#main">
-   Skip to content
-  </a>
-  <nav aria-label="Main navigation" class="navbar">
-   <a class="site-brand" href="../index.html">
-    <img alt="" height="30" src="../images/logo.png" width="54"/>
-    ADU TourGuide
-   </a>
-   <button aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation" class="hamburger">
-    ☰
-   </button>
-   <ul id="navLinks">
-    <li>
-     <a href="../index.html">
-      Home
-     </a>
-    </li>
-    <li>
-     <a aria-current="page" href="../gpa-calculator/index.html">
-      GPA Calculator
-     </a>
-    </li>
-    <li>
-     <a href="../schedule-generator/index.html">
-      Schedule Generator
-     </a>
-    </li>
-    <li>
-     <a href="../study-planner/index.html">
-      Degree Planner
-     </a>
-    </li>
-    <li>
-     <a href="../gpa-plan/index.html">
-      GPA Planner
-     </a>
-    </li>
-    <li>
-     <a href="../grade-plan/index.html">
-      Grade Planner
-     </a>
-    </li>
-    <li>
-     <a href="../project-split/index.html">
-      Project Work Split
-     </a>
-    </li>
-   </ul>
-  </nav>
-  <main id="main">
-   <h1>
-    GPA Calculator
-   </h1>
-   <p class="lead">
-    Calculate your credit-weighted GPA using the ADU grade scale.
-   </p>
-   <section class="panel">
-    <div class="fields previous-gpa">
-     <label for="current-gpa">
-      Current cumulative GPA
-      <input id="current-gpa" max="4" min="0" placeholder="e.g. 3.20" required="" step="0.01" type="number"/>
-     </label>
-     <label for="completed-credits">
-      Credit hours already completed
-      <input id="completed-credits" min="0" placeholder="e.g. 60" required="" step="0.5" type="number"/>
-     </label>
-    </div>
-    <h2>
-     Current Semester Courses
-    </h2>
-    <div class="toolbar">
-     <button id="add">
-      + Add row
-     </button>
-    </div>
-    <div class="table-wrap">
-     <table>
-      <thead>
-       <tr>
-        <th>
-         Course
-        </th>
-        <th>
-         Letter grade
-        </th>
-        <th>
-         Credits
-        </th>
-        <th>
-         Action
-        </th>
-       </tr>
-      </thead>
-      <tbody id="rows">
-      </tbody>
-     </table>
-    </div>
-    <div aria-live="polite" class="gpa-results">
-     <div class="metric gpa-summary">
-      <span class="muted">
-       Cumulative GPA
-      </span>
-      <div class="result" id="result">
-       —
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width,initial-scale=1" name="viewport"/>
+    <meta content="#0b233f" name="theme-color"/>
+    <title>
+      GPA Calculator | ADU Tour Guide
+    </title>
+    <meta content="Calculate your GPA instantly using ADU's grading scale. Add your courses, grades and credit hours." name="description"/>
+    <link href="../shared.css" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet"/>
+    <script defer="" src="../shared.js">
+    </script>
+    <script defer="" src="../storage.js">
+    </script>
+    <script defer="" src="script.js">
+    </script>
+    <link href="../images/logo.png" rel="icon" type="image/png"/>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Skip to content
+    </a>
+    <nav aria-label="Main navigation" class="navbar">
+      <a class="site-brand" href="../index.html">
+        <img alt="" height="30" src="../images/logo.png" width="54"/>
+        ADU TourGuide
+      </a>
+      <button aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation" class="hamburger">
+        ☰
+      </button>
+      <ul id="navLinks">
+        <li>
+          <a href="../index.html">
+            Home
+          </a>
+        </li>
+        <li>
+          <a aria-current="page" href="../gpa-calculator/index.html">
+            GPA Calculator
+          </a>
+        </li>
+        <li>
+          <a href="../schedule-generator/index.html">
+            Schedule Generator
+          </a>
+        </li>
+        <li>
+          <a href="../study-planner/index.html">
+            Degree Planner
+          </a>
+        </li>
+        <li>
+          <a href="../gpa-plan/index.html">
+            GPA Planner
+          </a>
+        </li>
+        <li>
+          <a href="../gpa-retake/index.html">
+            GPA Retake Calculator
+          </a>
+        </li>
+        <li>
+          <a href="../project-split/index.html">
+            Project Work Split
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <main id="main">
+      <h1>
+        GPA Calculator
+      </h1>
+      <p class="lead">
+        Calculate your credit-weighted GPA using the ADU grade scale.
+      </p>
+      <section class="panel">
+        <div class="fields previous-gpa">
+          <label for="current-gpa">
+            Current cumulative GPA
+            <input id="current-gpa" max="4" min="0" placeholder="e.g. 3.20" required="" step="0.01" type="number"/>
+          </label>
+          <label for="completed-credits">
+            Credit hours already completed
+            <input id="completed-credits" min="0" placeholder="e.g. 60" required="" step="0.5" type="number"/>
+          </label>
+        </div>
+        <h2>
+          Current Semester Courses
+        </h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  Course
+                </th>
+                <th>
+                  Letter grade
+                </th>
+                <th>
+                  Credits
+                </th>
+                <th>
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody id="rows">
+            </tbody>
+          </table>
+        </div>
+        <div class="toolbar">
+          <button id="add">
+            + Add Course
+          </button>
+        </div>
+        <div aria-live="polite" class="gpa-results">
+          <div class="metric gpa-summary">
+            <span class="muted">
+              Cumulative GPA
+            </span>
+            <div class="result" id="result">
+              —
+            </div>
+            <div id="credits">
+            </div>
+          </div>
+          <div class="metric gpa-summary">
+            <span class="muted">
+              Semester GPA
+            </span>
+            <div class="result" id="semester-gpa">
+              —
+            </div>
+            <div id="semester-credits">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>
+          ADU grading scale
+        </h2>
+        <div class="table-wrap">
+          <table class="grading-scale">
+            <thead>
+              <tr>
+                <th scope="col">
+                  Letter grade
+                </th>
+                <th scope="col">
+                  Score range (%)
+                </th>
+                <th scope="col">
+                  Grade points
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">
+                  A
+                </th>
+                <td>
+                  90–100
+                </td>
+                <td>
+                  4.0
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  B+
+                </th>
+                <td>
+                  85–89
+                </td>
+                <td>
+                  3.5
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  B
+                </th>
+                <td>
+                  80–84
+                </td>
+                <td>
+                  3.0
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  C+
+                </th>
+                <td>
+                  75–79
+                </td>
+                <td>
+                  2.5
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  C
+                </th>
+                <td>
+                  70–74
+                </td>
+                <td>
+                  2.0
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  D+
+                </th>
+                <td>
+                  65–69
+                </td>
+                <td>
+                  1.5
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  D
+                </th>
+                <td>
+                  60–64
+                </td>
+                <td>
+                  1.0
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  F
+                </th>
+                <td>
+                  Below 60
+                </td>
+                <td>
+                  0.0
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <div aria-live="polite" class="status" id="status" role="status">
       </div>
-      <div id="credits">
-      </div>
-     </div>
-     <div class="metric gpa-summary">
-      <span class="muted">
-       Semester GPA
-      </span>
-      <div class="result" id="semester-gpa">
-       —
-      </div>
-      <div id="semester-credits">
-      </div>
-     </div>
-    </div>
-   </section>
-   <section class="panel">
-    <h2>
-     ADU grading scale
-    </h2>
-    <div class="table-wrap">
-     <table class="grading-scale">
-      <thead>
-       <tr>
-        <th scope="col">
-         Letter grade
-        </th>
-        <th scope="col">
-         Score range (%)
-        </th>
-        <th scope="col">
-         Grade points
-        </th>
-       </tr>
-      </thead>
-      <tbody>
-       <tr>
-        <th scope="row">
-         A
-        </th>
-        <td>
-         90–100
-        </td>
-        <td>
-         4.0
-        </td>
-       </tr>
-       <tr>
-        <th scope="row">
-         B+
-        </th>
-        <td>
-         85–89
-        </td>
-        <td>
-         3.5
-        </td>
-       </tr>
-       <tr>
-        <th scope="row">
-         B
-        </th>
-        <td>
-         80–84
-        </td>
-        <td>
-         3.0
-        </td>
-       </tr>
-       <tr>
-        <th scope="row">
-         C+
-        </th>
-        <td>
-         75–79
-        </td>
-        <td>
-         2.5
-        </td>
-       </tr>
-       <tr>
-        <th scope="row">
-         C
-        </th>
-        <td>
-         70–74
-        </td>
-        <td>
-         2.0
-        </td>
-       </tr>
-       <tr>
-        <th scope="row">
-         D+
-        </th>
-        <td>
-         65–69
-        </td>
-        <td>
-         1.5
-        </td>
-       </tr>
-       <tr>
-        <th scope="row">
-         D
-        </th>
-        <td>
-         60–64
-        </td>
-        <td>
-         1.0
-        </td>
-       </tr>
-       <tr>
-        <th scope="row">
-         F
-        </th>
-        <td>
-         Below 60
-        </td>
-        <td>
-         0.0
-        </td>
-       </tr>
-      </tbody>
-     </table>
-    </div>
-   </section>
-   <div aria-live="polite" class="status" id="status" role="status">
-   </div>
-  </main>
-  <footer>
-   ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. · Not affiliated with Abu Dhabi University · A student project.
-  </footer>
- </body>
+    </main>
+    <footer>
+      ADU Tour Guide · Your all-in-one University app · Your data stays in this browser. · Not affiliated with Abu Dhabi University · A student project.
+    </footer>
+  </body>
 </html>
